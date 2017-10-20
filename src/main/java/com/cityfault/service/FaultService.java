@@ -8,6 +8,6 @@ import java.util.List;
 @Service
 public interface FaultService {
     void saveFault(Fault fault);
-    Fault getFaulrById(Long id);
+    Fault getFaultById(Long id);
     List<Fault> getAllFault();
 }
