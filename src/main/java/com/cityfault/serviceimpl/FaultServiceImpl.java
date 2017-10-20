@@ -1,14 +1,16 @@
 package com.cityfault.serviceimpl;
 
 
-import com.cityfault.Fault;
+import com.cityfault.model.Fault;
 import com.cityfault.repository.FaultRepository;
 import com.cityfault.service.FaultService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public class FaultServieImpl implements FaultService {
+@Service
+public class FaultServiceImpl implements FaultService {
     @Autowired
     FaultRepository repository;
 
