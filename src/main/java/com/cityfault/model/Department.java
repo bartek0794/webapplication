@@ -12,6 +12,6 @@ import javax.persistence.Id;
 public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int departmentId;
-    String departmentName;
+    private int departmentId;
+    private String departmentName;
 }

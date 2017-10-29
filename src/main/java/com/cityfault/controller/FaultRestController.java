@@ -34,6 +34,7 @@ public class FaultRestController {
 
     @RequestMapping(value="/createFault", method = RequestMethod.POST)
     public ResponseEntity<Fault> createFault(@RequestBody Fault fault) {
+        fault.setDepartment(departmentService.getDepartmentById(fault.getDepartment().getDepartmentId()));
         faultService.saveFault(fault);
         return new ResponseEntity<Fault>(fault, HttpStatus.CREATED);
     }

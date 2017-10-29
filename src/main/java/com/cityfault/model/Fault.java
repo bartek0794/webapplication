@@ -2,17 +2,18 @@ package com.cityfault.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @Entity
 public class Fault {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long faultId;
-    String email;
-    String description;
+    private Long faultId;
+    private String email;
+    private String description;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Department department;
+
+
 }
