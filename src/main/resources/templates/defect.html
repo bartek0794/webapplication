@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Order category</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <table th:width="600px">
+        <tr>
+            <td>
+                <h4>Defect id</h4>
+            </td>
+            <td>
+                <span th:text="${defect.getFaultId()}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h4>Email</h4>
+            </td>
+            <td>
+                <span th:text="${defect.getEmail()}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h4>Description</h4>
+            </td>
+            <td>
+                <span th:text="${defect.getDescription()}"></span>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

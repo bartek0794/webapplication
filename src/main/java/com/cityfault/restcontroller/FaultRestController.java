@@ -1,4 +1,4 @@
-package com.cityfault.controller;
+package com.cityfault.restcontroller;
 
 import com.cityfault.model.Department;
 import com.cityfault.model.Fault;
