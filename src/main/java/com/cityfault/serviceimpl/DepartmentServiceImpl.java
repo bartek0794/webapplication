@@ -16,11 +16,12 @@ public class DepartmentServiceImpl implements DepartmentService {
     public void saveDepartment(Department department) {
         repository.save(department);
     }
-
     public Department getDepartmentById(int id) {
         return repository.findByDepartmentId(id);
     }
-
+    public Department getDepartmentByName(String name) {
+        return repository.findByDepartmentName(name);
+    }
     public List<Department> getAllDepartments() {
         return repository.findAll();
     }

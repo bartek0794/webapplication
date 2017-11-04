@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add user</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+<div class="container">
+    <form action="#" th:action="@{/addUser}" th:object="${user}" method="post" enctype="multipart/form-data" class="form-create-user">
+        <div style="padding-left: -150px">
+        <div lang="pl" th:replace="validation :: validation" > </div>
+        </div>
+        <h2 class="form-signin-heading" align="center">Add user</h2><br/>
+        <div class="row text-center" style="width: 300px; margin: 0 auto">
+            <div class="col-md-6 text-center">
+                <img id="output" src="/img/avatar.jpg" th:width="200" th:height="200"/>
+                <input id="selectedFile" th:name="file" type="file" onchange="loadFile(event)" style="position:absolute;visibility:hidden;"/>
+                <input type="button" id="browseButton" value="Choose photo" onclick="selectedFile.click()"/>
+                <script>
+                    var loadFile = function(event) {
+                        var output = document.getElementById('output');
+                        output.src = URL.createObjectURL(event.target.files[0]);
+                    };
+                </script>
+            </div>
+            <input type="email" id="inputEmail" class="form-control" placeholder="Email address"  th:field="*{email}" />
+            <input type="password" id="inputPassword" th:field="*{password}" class="form-control" placeholder="Password"/>
+            <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder="Confirm password"/>
+            <h4 th:align="center">Choose role</h4>
+            <select id="chooseRole" name="role" onChange="setProfession(this)" class="form-control">
+                <option th:each="role : ${roles}" th:value="${role.role}" th:text="${role.role}"></option>-->
+            </select>
+            <input type="text" id="inputFirstName" th:field="*{firstName}" class="form-control" placeholder="First Name"/>
+            <input type="text" id="inputLastName" class="form-control" th:field="*{lastName}" placeholder="Last Name"/>
+            <input type="text" id="inputPhoneNumber" class="form-control" th:field="*{phoneNumber}" placeholder="Phone Number"/><br/>
+            <h4 id="labelDepartment" th:align="center" style="visibility: hidden; margin-top: -10px">Choose profession</h4>
+           <!-- <select id="department" name="department" onChange="onstatechange(this)"  class="form-control" style="visibility: hidden; margin-left: 10px;">
+                <option th:each="department : ${departments}" th:value="${department.departmentName}" th:text="${department.departmentName}"></option>
+            </select>-->
+            </p>
+            <input type="submit" value="Create an account" class="btn btn-lg btn-primary btn-block" style="margin-top: 20px"/>
+        </div>
+
+    </form>
+    <script type="text/javascript">
+        function setProfession(select) {
+            if (select.value == "SPECIALIST") {
+                document.getElementById("department").style.visibility = 'visible';
+                document.getElementById("labelDepartment").style.visibility = 'visible';
+            }
+            else {
+                document.getElementById("department").style.visibility = 'hidden';
+                document.getElementById("labelDepartment").style.visibility = 'hidden';
+            }
+        }
+    </script>
+</div>
+</body>
+</html>

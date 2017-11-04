@@ -1,0 +1,7 @@
+<div th:fragment="validation" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="alert alert-danger" th:align="center" th:if="${#fields.hasErrors('*')}" style="margin:0 auto; z-index: 10; border-radius: 20px; position: fixed; width: 340px;">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <span class=" glyphicon glyphicon-alert">&nbsp;<b>ERROR</b></span>
+        <p th:each="err : ${#fields.detailedErrors()}" th:text="${err}"></p>
+    </div>
+</div>
