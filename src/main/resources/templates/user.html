@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+<table th:width="600px">
+    <tr>
+        <td>
+        </td>
+        <td>
+            <img th:src="@{'data:image/jpg;base64,'+${user.getEncodedAvatar()}}" width="150" height="150" class="img-circle" style="margin-left: 25px"/>
+            <br/>
+            <br/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <h4>User id</h4>
+        </td>
+        <td>
+            <span th:text="${user.getUserId()}"></span>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <h4>Email</h4>
+        </td>
+        <td>
+            <span th:text="${user.getEmail()}"></span>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <h4>First name</h4>
+        </td>
+        <td>
+            <span th:text="${user.getFirstName()}"></span>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <h4>Last name</h4>
+        </td>
+        <td>
+            <span th:text="${user.getLastName()}"></span>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <h4>Phone number</h4>
+        </td>
+        <td>
+            <span th:text="${user.getPhoneNumber()}"></span>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

@@ -29,15 +29,15 @@
             <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder="Confirm password"/>
             <h4 th:align="center">Choose role</h4>
             <select id="chooseRole" name="role" onChange="setProfession(this)" class="form-control">
-                <option th:each="role : ${roles}" th:value="${role.role}" th:text="${role.role}"></option>-->
+                <option th:each="role : ${roles}" th:value="${role.role}" th:text="${role.role}"></option>
             </select>
             <input type="text" id="inputFirstName" th:field="*{firstName}" class="form-control" placeholder="First Name"/>
             <input type="text" id="inputLastName" class="form-control" th:field="*{lastName}" placeholder="Last Name"/>
             <input type="text" id="inputPhoneNumber" class="form-control" th:field="*{phoneNumber}" placeholder="Phone Number"/><br/>
             <h4 id="labelDepartment" th:align="center" style="visibility: hidden; margin-top: -10px">Choose profession</h4>
-           <!-- <select id="department" name="department" onChange="onstatechange(this)"  class="form-control" style="visibility: hidden; margin-left: 10px;">
+            <select id="department" name="departmentName" class="form-control">
                 <option th:each="department : ${departments}" th:value="${department.departmentName}" th:text="${department.departmentName}"></option>
-            </select>-->
+            </select>
             </p>
             <input type="submit" value="Create an account" class="btn btn-lg btn-primary btn-block" style="margin-top: 20px"/>
         </div>

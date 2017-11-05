@@ -16,3 +16,25 @@ $(document).ready( function () {
         window.location.href = '/defect/' + $(this).closest('tr').find('td:eq(0)').html();
     });
 });
+
+$(document).ready( function () {
+    var table = $('#usersTable').DataTable({
+        "sAjaxSource": "/getAllUsers",
+        "sAjaxDataProp": "",
+        "stateSave": "true",
+        "order": [[ 0, "asc" ]],
+        "aoColumns": [
+            { "mData": "userId"},
+            { "mData": "email" },
+            { "mData": "department.departmentName" },
+            { "mData": "roles[0].role" },
+            { "mData": "firstName" },
+            { "mData": "lastName" },
+            { "mData": "phoneNumber" }
+        ]
+    })
+
+    $('#usersTable').on('click', 'tbody td', function(){
+        window.location.href = '/user/' + $(this).closest('tr').find('td:eq(0)').html();
+    });
+});

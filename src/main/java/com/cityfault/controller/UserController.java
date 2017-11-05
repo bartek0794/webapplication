@@ -12,10 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,6 +31,22 @@ public class UserController {
     private DepartmentService departmentService;
     @Autowired
     private RoleService roleService;
+
+    @RequestMapping("/users")
+    public String showAllUsers() {
+        return "/admin/users";
+    }
+
+    @RequestMapping(value = "/user/{id}", method= RequestMethod.GET)
+    public String getOrder(@PathVariable int id, Model model) {
+        model.addAttribute("user", userService.findById(id));
+        return "user";
+    }
+
+    @RequestMapping(value={"/","/index", "/login"}, method = RequestMethod.GET)
+    public String login(){
+        return "login";
+    }
 
     @GetMapping("/addUser")
     public String registryForm(Model model) {
@@ -83,7 +96,7 @@ public class UserController {
         user.setAvatar(bytes);
 
         Role role = roleService.getRoleByName(request.getParameter("role"));
-        user.setDepartment(departmentService.getDepartmentByName(request.getParameter("department")));
+        user.setDepartment(departmentService.getDepartmentByName(request.getParameter("departmentName")));
         userService.save(user, new HashSet<Role>(Arrays.asList(role)));
         return "redirect:users";
     }
