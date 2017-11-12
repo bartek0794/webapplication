@@ -80,7 +80,7 @@ public class UserController {
         }
 
         if(file.getOriginalFilename().equals("")) {
-            File defaultFile = new File("C:\\Users\\Bartek\\IdeaProjects\\ordersystemmanagement\\src\\main\\resources\\static\\img\\avatar.jpg");
+            File defaultFile = new File("/img/avatar.jpg");
             FileInputStream input = new FileInputStream(defaultFile);
             file = new MockMultipartFile("defaultFile",
                     defaultFile.getName(), "text/plain", IOUtils.toByteArray(input));

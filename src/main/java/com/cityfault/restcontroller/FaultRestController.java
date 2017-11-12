@@ -2,8 +2,10 @@ package com.cityfault.restcontroller;
 
 import com.cityfault.model.Department;
 import com.cityfault.model.Fault;
+import com.cityfault.model.Status;
 import com.cityfault.service.DepartmentService;
 import com.cityfault.service.FaultService;
+import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +37,8 @@ public class FaultRestController {
     @RequestMapping(value="/createFault", method = RequestMethod.POST)
     public ResponseEntity<Fault> createFault(@RequestBody Fault fault) {
         fault.setDepartment(departmentService.getDepartmentById(fault.getDepartment().getDepartmentId()));
+        fault.setStatus(Status.TO_VERIFICATION.toString());
+        fault.setCreateDate(LocalDateTime.now());
         faultService.saveFault(fault);
         return new ResponseEntity<Fault>(fault, HttpStatus.CREATED);
     }

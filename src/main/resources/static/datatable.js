@@ -8,7 +8,10 @@ $(document).ready( function () {
             { "mData":  "faultId"},
             { "mData": "email" },
             { "mData": "description" },
-            { "mData": "department.departmentName" }
+            { "mData": "department.departmentName" },
+            { "mData": "status" },
+            { "mData": "priority" },
+            { "mData": "createDate" }
         ]
     })
 
