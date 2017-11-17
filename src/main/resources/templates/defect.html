@@ -3,78 +3,80 @@
 <head>
     <title>Order category</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css" />
     <script src="/js/script.js"></script>
 </head>
 <body>
-    <table th:width="600px">
-        <tr>
-            <td>
-            </td>
-            <td>
-                <img id="myImg" th:src="@{'data:image/jpg;base64,'+${defect.getEncodedPhoto()}}" width="150" height="150" style="margin-left: 25px"/>
-                <div id="myModal" class="modal">
+    <div class="container">
+        <table th:width="600px">
+            <tr>
+                <td>
+                </td>
+                <td>
+                    <img id="myImg" th:src="@{'data:image/jpg;base64,'+${defect.getEncodedPhoto()}}" width="150" height="150" style="margin-left: 25px"/>
+                    <div id="myModal" class="modal">
+                        <span class="close">&times;</span>
+                        <img class="modal-content" id="img01">
+                        <div id="caption"></div>
+                    </div>
+                    <br/>
+                    <br/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h4>Defect id</h4>
+                </td>
+                <td>
+                    <span th:text="${defect.getFaultId()}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h4>Email</h4>
+                </td>
+                <td>
+                    <span th:text="${defect.getEmail()}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h4>Description</h4>
+                </td>
+                <td>
+                    <span th:text="${defect.getDescription()}"></span>
+                </td>
+            </tr>
+        </table>
+        <input type="hidden" id="latitude" th:value="${defect.getLatitude()}"/>
+        <input type="hidden" id="longitude" th:value="${defect.getLongitude()}"/>
+        <div id="map"></div>
+    </div>
+    <script>
 
-                    <!-- The Close Button -->
-                    <span class="close">&times;</span>
+        function initMap() {
+            var userLng = parseFloat($('#longitude').val());
+            var userLat = parseFloat($('#latitude').val());
 
-                    <!-- Modal Content (The Image) -->
-                    <img class="modal-content" id="img01">
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: {lat: userLat, lng: userLng}
+            });
 
-                    <!-- Modal Caption (Image Text) -->
-                    <div id="caption"></div>
-                </div>
-                <br/>
-                <br/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <h4>Defect id</h4>
-            </td>
-            <td>
-                <span th:text="${defect.getFaultId()}"></span>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <h4>Email</h4>
-            </td>
-            <td>
-                <span th:text="${defect.getEmail()}"></span>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <h4>Description</h4>
-            </td>
-            <td>
-                <span th:text="${defect.getDescription()}"></span>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <h4>Latitude</h4>
-            </td>
-            <td>
-                <span th:text="${defect.getLatitude()}"></span>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <h4>Longitude</h4>
-            </td>
-            <td>
-                <span th:text="${defect.getLongitude()}"></span>
-            </td>
-        </tr>
-    </table>
+            var marker = new google.maps.Marker({
+                position: {lat: userLat, lng: userLng},
+                map: map
+            });
+        }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDS2u6J126Ba5r6doryChmqvOhTb85GF6M&callback=initMap">
+    </script>
 
     <script>
-        // Get the modal
         var modal = document.getElementById('myModal');
-
-        // Get the image and insert it inside the modal - use its "alt" text as a caption
         var img = document.getElementById('myImg');
         var modalImg = document.getElementById("img01");
         var captionText = document.getElementById("caption");
@@ -84,15 +86,11 @@
             captionText.innerHTML = this.alt;
         }
 
-        // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];
 
-        // When the user clicks on <span> (x), close the modal
         span.onclick = function() {
             modal.style.display = "none";
         }
     </script>
-
-
 </body>
 </html>
