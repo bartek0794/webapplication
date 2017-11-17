@@ -6,6 +6,7 @@ import org.joda.time.LocalDateTime;
 
 
 import javax.persistence.*;
+import java.util.Base64;
 
 @Data
 @Entity
@@ -19,10 +20,18 @@ public class Fault {
     private Department department;
     private String status;
     private String priority;
+    private byte[] photo;
+    private double latitude;
+    private double longitude;
+
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
     private LocalDateTime createDate;
 
     public String getCreateDate() {
         return createDate.toString();
+    }
+
+    public String getEncodedPhoto() {
+        return Base64.getEncoder().encodeToString(photo);
     }
 }
