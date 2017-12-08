@@ -1,6 +1,7 @@
 package com.cityfault.controller;
 
 import com.cityfault.model.Fault;
+import com.cityfault.service.DepartmentService;
 import com.cityfault.service.FaultService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,8 @@ public class HomeController {
 
     @Autowired
     private FaultService faultService;
+    @Autowired
+    private DepartmentService departmentService;
 
     @RequestMapping("/")
     public String getHomePage() {
@@ -34,13 +37,21 @@ public class HomeController {
         return "defects";
     }
 
-
     @RequestMapping(value = "/defect/{id}", method= RequestMethod.GET)
     public String getOrder(@PathVariable long id, Model model) {
         model.addAttribute("defect", faultService.getFaultById(id));
         return "defect";
     }
 
+    @RequestMapping("/departments")
+    public String showAllDepartments() {
+        return "/admin/departments";
+    }
 
+    @RequestMapping(value = "/department/{id}", method= RequestMethod.GET)
+    public String getDepartment(@PathVariable int id, Model model) {
+        model.addAttribute("department", departmentService.getDepartmentById(id));
+        return "/admin/department";
+    }
 
 }

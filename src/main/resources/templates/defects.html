@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Defects</title>
+    <title th:text="#{title.defects}"></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -16,13 +16,13 @@
 <table id="defectsTable" class="display">
     <thead>
     <tr>
-        <th>Id</th>
-        <th>Email</th>
-        <th>Description</th>
-        <th>Department</th>
-        <th>Status</th>
-        <th>Priority</th>
-        <th>Create date</th>
+        <th th:text="#{table.header.id}"></th>
+        <th th:text="#{table.header.email}"></th>
+        <th th:text="#{table.header.description}"></th>
+        <th th:text="#{table.header.department}"></th>
+        <th th:text="#{table.header.status}"></th>
+        <th th:text="#{table.header.priority}"></th>
+        <th th:text="#{table.header.createDate}"></th>
     </tr>
     </thead>
 </table>

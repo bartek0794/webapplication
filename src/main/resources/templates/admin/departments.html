@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title th:text="#{title.users}"></title>
+    <title th:text="#{title.departments}"></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -13,16 +13,11 @@
 <body>
 <div lang="pl" th:replace="navbar :: navbar"> </div>
 <div class="container">
-    <table id="usersTable" class="display">
+    <table id="departmentsTable" class="display">
         <thead>
         <tr>
             <th th:text="#{table.header.id}"></th>
-            <th th:text="#{table.header.email}"></th>
             <th th:text="#{table.header.department}"></th>
-            <th th:text="#{table.header.role}"></th>
-            <th th:text="#{table.header.firstName}"></th>
-            <th th:text="#{table.header.lastName}"></th>
-            <th th:text="#{table.header.phoneNumber}"></th>
         </tr>
         </thead>
     </table>

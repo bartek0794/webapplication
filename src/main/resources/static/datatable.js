@@ -41,3 +41,20 @@ $(document).ready( function () {
         window.location.href = '/user/' + $(this).closest('tr').find('td:eq(0)').html();
     });
 });
+
+$(document).ready( function () {
+    var table = $('#departmentsTable').DataTable({
+        "sAjaxSource": "/getAllDepartments",
+        "sAjaxDataProp": "",
+        "stateSave": "true",
+        "order": [[ 0, "asc" ]],
+        "aoColumns": [
+            { "mData": "departmentId"},
+            { "mData": "departmentName" }
+        ]
+    })
+
+    $('#departmentsTable').on('click', 'tbody td', function(){
+        window.location.href = '/department/' + $(this).closest('tr').find('td:eq(0)').html();
+    });
+});
