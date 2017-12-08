@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Add user</title>
+    <title th:text="#{form.user.header}"></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -11,38 +11,30 @@
 <div lang="pl" th:replace="navbar :: navbar"> </div>
 <div class="container">
     <form action="#" th:action="@{/addUser}" th:object="${user}" method="post" enctype="multipart/form-data" class="form-create-user">
-        <div style="padding-left: -150px">
         <div lang="pl" th:replace="validation :: validation" > </div>
-        </div>
-        <h2 class="form-signin-heading" align="center">Add user</h2><br/>
+        <h2 class="form-signin-heading" align="center" th:text="#{form.user.header}"></h2><br/>
         <div class="row text-center" style="width: 300px; margin: 0 auto">
-            <div class="col-md-6 text-center">
-                <img id="output" src="/img/avatar.jpg" th:width="200" th:height="200"/>
-                <input id="selectedFile" th:name="file" type="file" onchange="loadFile(event)" style="position:absolute;visibility:hidden;"/>
-                <input type="button" id="browseButton" value="Choose photo" onclick="selectedFile.click()"/>
-                <script>
-                    var loadFile = function(event) {
-                        var output = document.getElementById('output');
-                        output.src = URL.createObjectURL(event.target.files[0]);
-                    };
-                </script>
-            </div>
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email address"  th:field="*{email}" />
-            <input type="password" id="inputPassword" th:field="*{password}" class="form-control" placeholder="Password"/>
-            <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder="Confirm password"/>
-            <h4 th:align="center">Choose role</h4>
+            <img id="output" src="/img/avatar.jpg" th:width="200" th:height="200"/>
+            <input id="selectedFile" th:name="file" type="file" onchange="loadFile(event)" style="position:absolute;visibility:hidden;"/>
+            <input type="button" id="browseButton" th:value="#{form.input.avatar}" onclick="selectedFile.click()"/>
+            <br/>
+            <br/>
+            <input type="email" id="inputEmail" class="form-control" th:placeholder="#{form.input.email}"  th:field="*{email}" />
+            <input type="password" id="inputPassword" th:field="*{password}" class="form-control" th:placeholder="#{form.input.password}"/>
+            <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" th:placeholder="#{form.input.confirmPassword}"/>
+            <h4 th:align="center" th:text="#{form.input.chooseRole}"></h4>
             <select id="chooseRole" name="role" onChange="setProfession(this)" class="form-control">
                 <option th:each="role : ${roles}" th:value="${role.role}" th:text="${role.role}"></option>
             </select>
-            <input type="text" id="inputFirstName" th:field="*{firstName}" class="form-control" placeholder="First Name"/>
-            <input type="text" id="inputLastName" class="form-control" th:field="*{lastName}" placeholder="Last Name"/>
-            <input type="text" id="inputPhoneNumber" class="form-control" th:field="*{phoneNumber}" placeholder="Phone Number"/><br/>
-            <h4 id="labelDepartment" th:align="center" style="visibility: hidden; margin-top: -10px">Choose profession</h4>
+            <input type="text" id="inputFirstName" th:field="*{firstName}" class="form-control" th:placeholder="#{form.input.firstName}"/>
+            <input type="text" id="inputLastName" class="form-control" th:field="*{lastName}" th:placeholder="#{form.input.lastName}"/>
+            <input type="text" id="inputPhoneNumber" class="form-control" th:field="*{phoneNumber}" th:placeholder="#{form.input.phoneNumber}"/><br/>
+            <h4 id="labelDepartment" th:align="center" th:text="#{form.input.department}"></h4>
             <select id="department" name="departmentName" class="form-control">
                 <option th:each="department : ${departments}" th:value="${department.departmentName}" th:text="${department.departmentName}"></option>
             </select>
             </p>
-            <input type="submit" value="Create an account" class="btn btn-lg btn-primary btn-block" style="margin-top: 20px"/>
+            <input type="submit" th:value="#{form.add}" class="btn btn-lg btn-primary btn-block" style="margin-top: 20px"/>
         </div>
 
     </form>
@@ -57,6 +49,13 @@
                 document.getElementById("labelDepartment").style.visibility = 'hidden';
             }
         }
+    </script>
+
+    <script>
+        var loadFile = function(event) {
+            var output = document.getElementById('output');
+            output.src = URL.createObjectURL(event.target.files[0]);
+        };
     </script>
 </div>
 </body>

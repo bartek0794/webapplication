@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>User</title>
+    <title th:text="#{title.department}"></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -9,10 +9,11 @@
 </head>
 <body>
 <div lang="pl" th:replace="navbar :: navbar"> </div>
+<div class="container">
 <table th:width="600px">
     <tr>
         <td>
-            <h4>User id</h4>
+            <h4 th:text="#{form.input.department.id}"></h4>
         </td>
         <td>
             <span th:text="${department.getDepartmentId()}"></span>
@@ -20,12 +21,13 @@
     </tr>
     <tr>
         <td>
-            <h4>Email</h4>
+            <h4 th:text="#{form.input.department.name}"></h4>
         </td>
         <td>
             <span th:text="${department.getDepartmentName()}"></span>
         </td>
     </tr>
 </table>
+</div>
 </body>
 </html>

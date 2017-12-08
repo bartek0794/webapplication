@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Add user</title>
+    <title th:text="#{form.department.header}"></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -11,15 +11,12 @@
 <div lang="pl" th:replace="navbar :: navbar"> </div>
 <div class="container">
     <form action="#" th:action="@{/addDepartment}" th:object="${department}" method="post">
-        <div style="padding-left: -150px">
         <div lang="pl" th:replace="validation :: validation" > </div>
-        </div>
         <h2 class="form-signin-heading" align="center" th:text="#{form.department.header}"></h2><br/>
         <div class="row text-center" style="width: 300px; margin: 0 auto">
           <input type="text" class="form-control" th:placeholder="#{form.input.department.name}"  th:field="*{departmentName}" />
           <input type="submit" th:value="#{form.add}" class="btn btn-lg btn-primary btn-block"/>
         </div>
-
     </form>
   </div>
 </body>

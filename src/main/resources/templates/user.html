@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>User</title>
+    <title th:text="#{title.user}"> </title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -9,6 +9,7 @@
 </head>
 <body>
 <div lang="pl" th:replace="navbar :: navbar"> </div>
+<div class="container">
 <table th:width="600px">
     <tr>
         <td>
@@ -21,7 +22,7 @@
     </tr>
     <tr>
         <td>
-            <h4>User id</h4>
+            <h4 th:text="#{form.input.userId}"></h4>
         </td>
         <td>
             <span th:text="${user.getUserId()}"></span>
@@ -29,7 +30,7 @@
     </tr>
     <tr>
         <td>
-            <h4>Email</h4>
+            <h4 th:text="#{form.input.email}"></h4>
         </td>
         <td>
             <span th:text="${user.getEmail()}"></span>
@@ -37,7 +38,7 @@
     </tr>
     <tr>
         <td>
-            <h4>First name</h4>
+            <h4 th:text="#{form.input.firstName}"></h4>
         </td>
         <td>
             <span th:text="${user.getFirstName()}"></span>
@@ -45,7 +46,7 @@
     </tr>
     <tr>
         <td>
-            <h4>Last name</h4>
+            <h4 th:text="#{form.input.lastName}"></h4>
         </td>
         <td>
             <span th:text="${user.getLastName()}"></span>
@@ -53,12 +54,13 @@
     </tr>
     <tr>
         <td>
-            <h4>Phone number</h4>
+            <h4 th:text="#{form.input.phoneNumber}"></h4>
         </td>
         <td>
             <span th:text="${user.getPhoneNumber()}"></span>
         </td>
     </tr>
 </table>
+</div>
 </body>
 </html>

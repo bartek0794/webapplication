@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +26,15 @@ public class DepartmentController {
 
     @PostMapping("/addDepartment")
     public String addDepartment(@Valid @ModelAttribute("department") Department department, BindingResult bindingResult) {
+        if(departmentService.getDepartmentByName(department.getDepartmentName()) != null) {
+            ObjectError error = new ObjectError("unique", "Department name already exists!");
+            bindingResult.addError(error);
+        }
+
+        if (bindingResult.hasErrors()) {
+            return "/admin/addDepartment";
+        }
+
         departmentService.saveDepartment(department);
         return "redirect:departments";
     }

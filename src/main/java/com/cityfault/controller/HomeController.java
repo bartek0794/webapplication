@@ -25,7 +25,7 @@ public class HomeController {
 
     @GetMapping("/international")
     public String getInternationalPage() {
-        return "redirect:home";
+        return "redirect:/";
     }
 
     @RequestMapping("/defects")

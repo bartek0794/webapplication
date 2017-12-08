@@ -5,16 +5,28 @@
     <title>Sign in</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
 </head>
-<body>
+<body style="background-color: #292b2c">
 <div class="container">
-    <form th:action="@{/login}" method="POST" class="form-signin">
-        <h2 class="form-signin-heading" align="center" th:text="#{login.signin}"></h2><br/>
+    <div class="row-right">
+        <div class="col-xs-12">
+            <div class="text-right">
+            <span style="color: white";>
+                <a th:href="@{'/international?lang=en'}" th:text="#{navbar.lang.eng}" style="color: white";></a>&nbsp;|
+                <a th:href="@{'/international?lang=pl'}" th:text="#{navbar.lang.pl}" style="color: white";></a>
+            </span>
+            </div>
+        </div>
+    </div>
+    <form th:action="@{/login}" method="POST" class="form-signin" id="loginForm">
+        <h2 class="form-signin-heading" align="center" th:text="#{login.signin}" style="color: white"></h2><br/>
         <input type="text" id="email" name="email" class="form-control" th:placeholder="#{login.email}" />
         <input type="password" id="password" name="password" class="form-control" th:placeholder="#{login.password}"/>
+        <br/>
         <input type="submit" class="btn btn-lg btn-primary btn-block" name="Submit" th:value="#{login.login}"/>
         <div align="center" th:if="${param.error}">
-            <p style="font-size: 20; color: #FF1C19;" th:name="#{login.error}"></p>
+            <p style="font-size: 20; color: #FF1C19;" th:text="#{login.error}"></p>
         </div>
     </form>
 </div>
