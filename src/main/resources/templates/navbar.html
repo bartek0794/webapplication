@@ -1,0 +1,52 @@
+<div th:fragment="navbar" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" th:href="@{'/home'}">Orders management</a>
+        </div>
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" th:text="#{defects}"><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a th:href="@{'/defects'}"> Show all orders</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown"  sec:authorize="hasAuthority('ADMIN')">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" th:text="#{users}"><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a th:href="@{'/users'}">Show all users</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a th:href="@{'/addUser'}">Add new user</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown" sec:authorize="hasAuthority('ADMIN')">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" th:text="#{tools}"><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a th:href="@{'/orderCategoryList'}">Departments</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a th:href="@{'/addOrderCategory'}">Add department</a></li>
+                        <li role="separator" class="divider"></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" th:text="#{lang.change}"><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a th:href="@{'/international?lang=en'}" th:text="#{lang.eng}"></a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a th:href="@{'/international?lang=pl'}" th:text="#{lang.pl}"></a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div sec:authorize="isAuthenticated()">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a th:href="@{'/logout'}" th:text="#{logout}"><span class="sr-only">(current)</span></a></li>
+            </ul>
+            <!--
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a th:href="@{'/profile/'+${#authentication.getPrincipal().getUsername()}}+'/show'" th:text="${#authentication.getPrincipal().getUsername()}"><span class="sr-only"></span></a></li>
+            </ul>
+            </div>-->
+        </div>
+</nav>
+</div>

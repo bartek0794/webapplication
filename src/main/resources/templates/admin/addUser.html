@@ -4,8 +4,11 @@
     <title>Add user</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div lang="pl" th:replace="navbar :: navbar"> </div>
 <div class="container">
     <form action="#" th:action="@{/addUser}" th:object="${user}" method="post" enctype="multipart/form-data" class="form-create-user">
         <div style="padding-left: -150px">
