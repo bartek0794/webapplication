@@ -1,6 +1,5 @@
 package com.cityfault.controller;
 
-import com.cityfault.model.Fault;
 import com.cityfault.service.DepartmentService;
 import com.cityfault.service.FaultService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.List;
-
 @Controller
 public class HomeController {
 
@@ -21,14 +18,14 @@ public class HomeController {
     @Autowired
     private DepartmentService departmentService;
 
-    @RequestMapping("/")
+    @RequestMapping({"/","home"})
     public String getHomePage() {
-      return "index";
+        return "home";
     }
 
     @GetMapping("/international")
     public String getInternationalPage() {
-        return "redirect:users";
+        return "redirect:home";
     }
 
     @RequestMapping("/defects")

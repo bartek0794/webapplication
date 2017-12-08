@@ -49,11 +49,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/addUser", "/getAllDepartments").permitAll()
-                .antMatchers("/admin/**","/user/**").hasAuthority("ADMIN").anyRequest()
+                .antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
                 .authenticated().and().csrf().disable().formLogin()
 
                 .loginPage("/login").failureUrl("/login?error=true")
-                .defaultSuccessUrl("/users")
+                .defaultSuccessUrl("/home")
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .and().logout()

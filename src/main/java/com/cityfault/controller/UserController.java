@@ -8,6 +8,8 @@ import com.cityfault.service.UserService;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -45,6 +47,10 @@ public class UserController {
 
     @RequestMapping(value={"/","/index", "/login"}, method = RequestMethod.GET)
     public String login(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if(!auth.getAuthorities().toString().equals("[ROLE_ANONYMOUS]")) {
+            return "redirect:/home";
+        }
         return "login";
     }
 
@@ -100,4 +106,11 @@ public class UserController {
         userService.save(user, new HashSet<Role>(Arrays.asList(role)));
         return "redirect:users";
     }
+
+    @RequestMapping(value = "/profile/{email}/show", method= RequestMethod.GET)
+    public String showProfile(@PathVariable String email) {
+        User user = userService.findByEmail(email);
+        return "redirect:/user/" + user.getUserId();
+    }
+
 }
