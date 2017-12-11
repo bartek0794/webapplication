@@ -20,7 +20,8 @@ public class Fault {
     private Department department;
     private String status;
     private String priority;
-    private byte[] photo;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Photo photo;
     private double latitude;
     private double longitude;
 
@@ -30,8 +31,7 @@ public class Fault {
     public String getCreateDate() {
         return createDate.toString();
     }
-
     public String getEncodedPhoto() {
-        return Base64.getEncoder().encodeToString(photo);
+        return Base64.getEncoder().encodeToString(photo.getPhoto());
     }
 }
