@@ -12,49 +12,49 @@
 <body>
 <div lang="pl" th:replace="navbar :: navbar"> </div>
     <div class="container">
-        <table th:width="600px">
-            <tr>
-                <td>
-                </td>
-                <td>
-                    <img id="myImg" th:src="@{'data:image/jpg;base64,'+${defect.getEncodedPhoto()}}" width="150" height="150" style="margin-left: 25px"/>
-                    <div id="myModal" class="modal">
-                        <span class="close">&times;</span>
-                        <img class="modal-content" id="img01">
-                        <div id="caption"></div>
-                    </div>
-                    <br/>
-                    <br/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h4 th:text="#{form.input.defect.id}"></h4>
-                </td>
-                <td>
-                    <span th:text="${defect.getFaultId()}"></span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h4 th:text="#{form.input.email}"></h4>
-                </td>
-                <td>
-                    <span th:text="${defect.getEmail()}"></span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h4 th:text="#{form.input.defect.description}"></h4>
-                </td>
-                <td>
-                    <span th:text="${defect.getDescription()}"></span>
-                </td>
-            </tr>
-        </table>
-        <input type="hidden" id="latitude" th:value="${defect.getLatitude()}"/>
-        <input type="hidden" id="longitude" th:value="${defect.getLongitude()}"/>
-        <div id="map"></div>
+        <div class="row">
+            <div class="col-xs-6">
+                <table th:width="600px">
+                    <tr>
+                        <td>
+                            <h4 th:text="#{form.input.defect.id}"></h4>
+                        </td>
+                        <td>
+                            <span th:text="${defect.getFaultId()}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4 th:text="#{form.input.email}"></h4>
+                        </td>
+                        <td>
+                            <span th:text="${defect.getEmail()}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4 th:text="#{form.input.defect.description}"></h4>
+                        </td>
+                        <td>
+                            <span th:text="${defect.getDescription()}"></span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-xs-6">
+                <img id="myImg" th:src="@{'data:image/jpg;base64,'+${defect.getEncodedPhoto()}}" width="150" height="150" style="margin-left: 25px"/>
+                <div id="myModal" class="modal">
+                    <span class="close">&times;</span>
+                    <img class="modal-content" id="img01">
+                    <div id="caption"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <input type="hidden" id="latitude" th:value="${defect.getLatitude()}"/>
+            <input type="hidden" id="longitude" th:value="${defect.getLongitude()}"/>
+            <div id="map"></div>
+        </div>>
     </div>
     <script>
 
