@@ -31,7 +31,7 @@
             <input type="text" id="inputPhoneNumber" class="form-control" th:field="*{phoneNumber}" th:placeholder="#{form.input.phoneNumber}"/><br/>
             <h4 id="labelDepartment" th:align="center" th:text="#{form.input.department}"></h4>
             <select id="department" name="departmentName" class="form-control">
-                <option th:each="department : ${departments}" th:value="${department.departmentName}" th:text="${department.departmentName}"></option>
+                <option th:each="department : ${departments}" th:value="${department.name}" th:text="${department.name}"></option>
             </select>
             </p>
             <input type="submit" th:value="#{form.add}" class="btn btn-lg btn-primary btn-block" style="margin-top: 20px"/>

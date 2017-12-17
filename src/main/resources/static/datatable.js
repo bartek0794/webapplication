@@ -8,9 +8,9 @@ $(document).ready( function () {
             { "mData":  "faultId"},
             { "mData": "email" },
             { "mData": "description" },
-            { "mData": "department.departmentName" },
-            { "mData": "status" },
-            { "mData": "priority" },
+            { "mData": "department.name" },
+            { "mData": "status.name" },
+            { "mData": "priority.name" },
             { "mData": "createDate" }
         ]
     })
@@ -29,7 +29,7 @@ $(document).ready( function () {
         "aoColumns": [
             { "mData": "userId"},
             { "mData": "email" },
-            { "mData": "department.departmentName" },
+            { "mData": "department.name" },
             { "mData": "roles[0].role" },
             { "mData": "firstName" },
             { "mData": "lastName" },
@@ -49,8 +49,8 @@ $(document).ready( function () {
         "stateSave": "true",
         "order": [[ 0, "asc" ]],
         "aoColumns": [
-            { "mData": "departmentId"},
-            { "mData": "departmentName" }
+            { "mData": "id"},
+            { "mData": "name" }
         ]
     })
 

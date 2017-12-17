@@ -18,8 +18,10 @@ public class Fault {
     private String description;
     @ManyToOne(cascade = CascadeType.ALL)
     private Department department;
-    private String status;
-    private String priority;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Status status;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Priority priority;
     @ManyToOne(cascade = CascadeType.ALL)
     private Photo photo;
     private double latitude;

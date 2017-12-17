@@ -14,7 +14,7 @@
         <div lang="pl" th:replace="validation :: validation" > </div>
         <h2 class="form-signin-heading" align="center" th:text="#{form.department.header}"></h2><br/>
         <div class="row text-center" style="width: 300px; margin: 0 auto">
-          <input type="text" class="form-control" th:placeholder="#{form.input.department.name}"  th:field="*{departmentName}" />
+          <input type="text" class="form-control" th:placeholder="#{form.input.department.name}"  th:field="*{name}" />
           <input type="submit" th:value="#{form.add}" class="btn btn-lg btn-primary btn-block"/>
         </div>
     </form>

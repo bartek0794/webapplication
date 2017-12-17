@@ -2,8 +2,9 @@ package com.cityfault.restcontroller;
 
 import com.cityfault.model.Department;
 import com.cityfault.model.Fault;
+import com.cityfault.model.Priority;
 import com.cityfault.model.Status;
-import com.cityfault.service.DepartmentService;
+import com.cityfault.service.FaultElementService;
 import com.cityfault.service.FaultService;
 import com.cityfault.service.PhotoService;
 import org.joda.time.LocalDateTime;
@@ -20,7 +21,11 @@ public class FaultRestController {
     @Autowired
     private FaultService faultService;
     @Autowired
-    private DepartmentService departmentService;
+    private FaultElementService<Department> departmentService;
+    @Autowired
+    private FaultElementService<Status> statusService;
+    @Autowired
+    private FaultElementService<Priority> priorityService;
     @Autowired
     private PhotoService photoService;
 
@@ -40,8 +45,8 @@ public class FaultRestController {
 
     @RequestMapping(value="/createFault", method = RequestMethod.POST)
     public ResponseEntity<Fault> createFault(@RequestBody Fault fault) {
-        fault.setDepartment(departmentService.getDepartmentById(fault.getDepartment().getDepartmentId()));
-        fault.setStatus(Status.TO_VERIFICATION.toString());
+        fault.setDepartment(departmentService.getById(fault.getDepartment().getId()));
+        fault.setStatus(statusService.getByName("TO VERIFICATION"));
         fault.setCreateDate(LocalDateTime.now());
         photoService.savePhoto(fault.getPhoto());
         faultService.saveFault(fault);
@@ -52,7 +57,7 @@ public class FaultRestController {
     @RequestMapping(value = "/getAllDepartments", method = RequestMethod.GET)
     public @ResponseBody
     List<Department> getAllDepartments() {
-        return departmentService.getAllDepartments();
+        return departmentService.getAll();
     }
 
 }

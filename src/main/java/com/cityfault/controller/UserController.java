@@ -1,8 +1,9 @@
 package com.cityfault.controller;
 
+import com.cityfault.model.Department;
 import com.cityfault.model.Role;
 import com.cityfault.model.User;
-import com.cityfault.service.DepartmentService;
+import com.cityfault.service.FaultElementService;
 import com.cityfault.service.RoleService;
 import com.cityfault.service.UserService;
 import org.apache.commons.io.IOUtils;
@@ -30,7 +31,7 @@ public class UserController {
     @Autowired
     private UserService userService;
     @Autowired
-    private DepartmentService departmentService;
+    private FaultElementService<Department> departmentService;
     @Autowired
     private RoleService roleService;
 
@@ -58,7 +59,7 @@ public class UserController {
     public String registryForm(Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("roles", roleService.getAllRoles());
-        model.addAttribute("departments", departmentService.getAllDepartments());
+        model.addAttribute("departments", departmentService.getAll());
         return "/admin/addUser";
     }
 
@@ -81,7 +82,7 @@ public class UserController {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("roles", roleService.getAllRoles());
-            model.addAttribute("departments", departmentService.getAllDepartments());
+            model.addAttribute("departments", departmentService.getAll());
             return "/admin/addUser";
         }
 
@@ -102,7 +103,7 @@ public class UserController {
         user.setAvatar(bytes);
 
         Role role = roleService.getRoleByName(request.getParameter("role"));
-        user.setDepartment(departmentService.getDepartmentByName(request.getParameter("departmentName")));
+        user.setDepartment(departmentService.getByName(request.getParameter("departmentName")));
         userService.save(user, new HashSet<Role>(Arrays.asList(role)));
         return "redirect:users";
     }

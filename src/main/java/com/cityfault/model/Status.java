@@ -1,3 +1,6 @@
 package com.cityfault.model;
 
-public enum Status {TO_VERIFICATION, VERIFIED, IN_PROGRESS, CLOSED};
+import javax.persistence.Entity;
+
+@Entity
+public class Status extends FaultElement{ }

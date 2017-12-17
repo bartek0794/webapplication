@@ -1,6 +1,7 @@
 package com.cityfault.controller;
 
-import com.cityfault.service.DepartmentService;
+import com.cityfault.model.Department;
+import com.cityfault.service.FaultElementService;
 import com.cityfault.service.FaultService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +17,7 @@ public class HomeController {
     @Autowired
     private FaultService faultService;
     @Autowired
-    private DepartmentService departmentService;
+    private FaultElementService<Department> departmentService;
 
     @RequestMapping({"/","home"})
     public String getHomePage() {
@@ -47,7 +48,7 @@ public class HomeController {
 
     @RequestMapping(value = "/department/{id}", method= RequestMethod.GET)
     public String getDepartment(@PathVariable int id, Model model) {
-        model.addAttribute("department", departmentService.getDepartmentById(id));
+        model.addAttribute("department", departmentService.getById(id));
         return "/admin/department";
     }
 

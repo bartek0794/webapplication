@@ -1,7 +1,7 @@
 package com.cityfault.controller;
 
 import com.cityfault.model.Department;
-import com.cityfault.service.DepartmentService;
+import com.cityfault.service.FaultElementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +16,7 @@ import javax.validation.Valid;
 @Controller
 public class DepartmentController {
     @Autowired
-    DepartmentService departmentService;
+    FaultElementService<Department> departmentService;
 
     @GetMapping("/addDepartment")
     public String addDepartment(Model model) {
@@ -26,7 +26,7 @@ public class DepartmentController {
 
     @PostMapping("/addDepartment")
     public String addDepartment(@Valid @ModelAttribute("department") Department department, BindingResult bindingResult) {
-        if(departmentService.getDepartmentByName(department.getDepartmentName()) != null) {
+        if(departmentService.getByName(department.getName()) != null) {
             ObjectError error = new ObjectError("unique", "Department name already exists!");
             bindingResult.addError(error);
         }
@@ -35,7 +35,7 @@ public class DepartmentController {
             return "/admin/addDepartment";
         }
 
-        departmentService.saveDepartment(department);
+        departmentService.saveFaultElement(department);
         return "redirect:departments";
     }
 }

@@ -1,3 +1,7 @@
 package com.cityfault.model;
 
-public enum Priority {LOW, MEDIUM, HIGH, CRITICAL};
+import javax.persistence.Entity;
+
+@Entity
+public class Priority extends FaultElement{
+}

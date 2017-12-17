@@ -44,7 +44,7 @@
                             <h4 th:text="#{table.header.department}"></h4>
                         </td>
                         <td>
-                            <span th:text="${defect.getDepartment().getDepartmentName()}"></span>
+                            <span th:text="${defect.getDepartment().getName()}"></span>
                         </td>
                     </tr>
                     <tr>
@@ -52,7 +52,7 @@
                             <h4 th:text="#{table.header.status}"></h4>
                         </td>
                         <td>
-                            <span th:text="${defect.getStatus()}"></span>
+                            <span th:text="${defect.getStatus().getName()}"></span>
                         </td>
                     </tr>
                     <tr>
@@ -60,7 +60,7 @@
                             <h4 th:text="#{table.header.priority}"></h4>
                         </td>
                         <td>
-                            <span th:text="${defect.getPriority()}"></span>
+                            <span th:text="${defect.getPriority().getName()}"></span>
                         </td>
                     </tr>
                     <tr>
