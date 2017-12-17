@@ -39,10 +39,42 @@
                             <span th:text="${defect.getDescription()}"></span>
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            <h4 th:text="#{table.header.department}"></h4>
+                        </td>
+                        <td>
+                            <span th:text="${defect.getDepartment().getDepartmentName()}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4 th:text="#{table.header.status}"></h4>
+                        </td>
+                        <td>
+                            <span th:text="${defect.getStatus()}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4 th:text="#{table.header.priority}"></h4>
+                        </td>
+                        <td>
+                            <span th:text="${defect.getPriority()}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4 th:text="#{table.header.createDate}"></h4>
+                        </td>
+                        <td>
+                            <span th:text="${defect.getCreateDate()}"></span>
+                        </td>
+                    </tr>
                 </table>
             </div>
             <div class="col-xs-6">
-                <img id="myImg" th:src="@{'data:image/jpg;base64,'+${defect.getEncodedPhoto()}}" width="150" height="150" style="margin-left: 25px"/>
+                <img id="myImg" th:src="@{'data:image/jpg;base64,'+${defect.getEncodedPhoto()}}" width="250" height="250" style="margin-left: 25px"/>
                 <div id="myModal" class="modal">
                     <span class="close">&times;</span>
                     <img class="modal-content" id="img01">
@@ -50,6 +82,8 @@
                 </div>
             </div>
         </div>
+        <br/>
+        <br/>
         <div class="row">
             <input type="hidden" id="latitude" th:value="${defect.getLatitude()}"/>
             <input type="hidden" id="longitude" th:value="${defect.getLongitude()}"/>
