@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${type} == 'Department' ? #{navbar.addDepartment} : (${type} == 'Status' ? #{navbar.addStatus} : #{navbar.addPriority})"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div lang="pl" th:replace="navbar :: navbar"> </div>
+<div class="container">
+    <form action="#" th:action="@{/add/{type}(type=${type})}" th:object="${faultElement}" method="post">
+        <div lang="pl" th:replace="validation :: validation" > </div>
+        <h2 class="form-signin-heading" align="center" th:text="${type} == 'Department' ? #{form.department.header} : (${type} == 'Status' ? #{form.status.header} : #{form.priority.header})"></h2><br/>
+        <div class="row text-center" style="width: 300px; margin: 0 auto">
+          <input type="text" class="form-control" th:placeholder="#{table.defectElement.name}"  th:field="*{name}" />
+           <input type="submit" th:value="#{form.add}" class="btn btn-lg btn-primary btn-block"/>
+        </div>
+    </form>
+  </div>
+</body>
+</html>

@@ -1,6 +1,8 @@
 package com.cityfault.controller;
 
 import com.cityfault.model.Department;
+import com.cityfault.model.Priority;
+import com.cityfault.model.Status;
 import com.cityfault.service.FaultElementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
@@ -17,25 +20,73 @@ import javax.validation.Valid;
 public class DepartmentController {
     @Autowired
     FaultElementService<Department> departmentService;
+    @Autowired
+    FaultElementService<Status> statusService;
+    @Autowired
+    FaultElementService<Priority> priorityService;
 
-    @GetMapping("/addDepartment")
-    public String addDepartment(Model model) {
-        model.addAttribute("department", new Department());
-        return "/admin/addDepartment";
+    @GetMapping("/addDefectElement/{type}")
+    public String addDepartment(@PathVariable String type, Model model) {
+        if(type.equals("department")) {
+            model.addAttribute("faultElement", new Department());
+            model.addAttribute("type", "Department");
+        }
+        else if(type.equals("status")) {
+            model.addAttribute("faultElement", new Status());
+            model.addAttribute("type", "Status");
+        }
+        else if(type.equals("priority")) {
+            model.addAttribute("faultElement", new Priority());
+            model.addAttribute("type", "Priority");
+        }
+        return "/admin/addDefectElement";
     }
 
-    @PostMapping("/addDepartment")
-    public String addDepartment(@Valid @ModelAttribute("department") Department department, BindingResult bindingResult) {
+    @PostMapping("/add/Department")
+    public String addDepartment(@Valid @ModelAttribute("faultElement") Department department, BindingResult bindingResult, Model model) {
         if(departmentService.getByName(department.getName()) != null) {
             ObjectError error = new ObjectError("unique", "Department name already exists!");
             bindingResult.addError(error);
         }
 
         if (bindingResult.hasErrors()) {
-            return "/admin/addDepartment";
+            model.addAttribute("type", "Department");
+            return "/admin/addDefectElement";
+        }
+        departmentService.saveFaultElement(department);
+
+        return "redirect:/defectElements/department";
+    }
+
+    @PostMapping("/add/Status")
+    public String addDepartment(@Valid @ModelAttribute("faultElement") Status status, BindingResult bindingResult, Model model) {
+        if(departmentService.getByName(status.getName()) != null) {
+            ObjectError error = new ObjectError("unique", "Status name already exists!");
+            bindingResult.addError(error);
         }
 
-        departmentService.saveFaultElement(department);
-        return "redirect:departments";
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("type", "Status");
+            return "/admin/addDefectElement";
+        }
+        statusService.saveFaultElement(status);
+
+        return "redirect:/defectElements/status";
+    }
+
+    @PostMapping("/add/Priority")
+    public String addPriority(@Valid @ModelAttribute("faultElement") Priority priority, BindingResult bindingResult, Model model) {
+        if(departmentService.getByName(priority.getName()) != null) {
+            ObjectError error = new ObjectError("unique", "Priority name already exists!");
+            bindingResult.addError(error);
+        }
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("type", "Priority");
+            return "/admin/addDefectElement";
+        }
+        priorityService.saveFaultElement(priority);
+
+        return "redirect:/defectElements/priority";
     }
 }

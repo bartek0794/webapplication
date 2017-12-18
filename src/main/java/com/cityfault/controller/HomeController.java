@@ -41,15 +41,16 @@ public class HomeController {
         return "defect";
     }
 
-    @RequestMapping("/departments")
-    public String showAllDepartments() {
-        return "/admin/departments";
+    @RequestMapping("/defectElements/{type}")
+    public String showAllDepartments(@PathVariable String type, Model model) {
+        model.addAttribute("type", type);
+        return "/admin/defectElements";
     }
 
-    @RequestMapping(value = "/department/{id}", method= RequestMethod.GET)
+    @RequestMapping(value = "/defectElement/{id}", method= RequestMethod.GET)
     public String getDepartment(@PathVariable int id, Model model) {
-        model.addAttribute("department", departmentService.getById(id));
-        return "/admin/department";
+        model.addAttribute("defectElement", departmentService.getById(id));
+        return "/admin/defectElement";
     }
 
 }

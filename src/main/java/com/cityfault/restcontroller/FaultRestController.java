@@ -1,9 +1,6 @@
 package com.cityfault.restcontroller;
 
-import com.cityfault.model.Department;
-import com.cityfault.model.Fault;
-import com.cityfault.model.Priority;
-import com.cityfault.model.Status;
+import com.cityfault.model.*;
 import com.cityfault.service.FaultElementService;
 import com.cityfault.service.FaultService;
 import com.cityfault.service.PhotoService;
@@ -13,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -53,11 +51,43 @@ public class FaultRestController {
         return new ResponseEntity<Fault>(fault, HttpStatus.CREATED);
     }
 
-    //DEPARTMNENTS
+    //Departments
     @RequestMapping(value = "/getAllDepartments", method = RequestMethod.GET)
     public @ResponseBody
     List<Department> getAllDepartments() {
-        return departmentService.getAll();
+        List<Department> departments = new ArrayList<Department>();
+        for(FaultElement department : departmentService.getAll()) {
+            if(department instanceof Department) {
+                departments.add((Department) department);
+            }
+        }
+        return departments;
+    }
+
+    //Statuses
+    @RequestMapping(value = "/getAllStatuses", method = RequestMethod.GET)
+    public @ResponseBody
+    List<Status> getAllStatuses() {
+        List<Status> statuses = new ArrayList<Status>();
+        for(FaultElement status :statusService.getAll()) {
+            if(status instanceof Status) {
+                statuses.add((Status) status);
+            }
+        }
+        return statuses;
+    }
+
+    //Statuses
+    @RequestMapping(value = "/getAllPriorities", method = RequestMethod.GET)
+    public @ResponseBody
+    List<Priority> getAllPriorities() {
+        List<Priority> priorities = new ArrayList<Priority>();
+        for(FaultElement priority : priorityService.getAll()) {
+            if(priority instanceof Priority) {
+                priorities.add((Priority) priority);
+            }
+        }
+        return priorities;
     }
 
 }

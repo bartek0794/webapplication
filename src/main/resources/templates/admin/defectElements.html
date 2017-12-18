@@ -1,23 +1,24 @@
 <!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="#{title.departments}"></title>
+    <title th:text="${type} == 'department' ? #{title.departments} : (${type} == 'status' ? #{title.statuses} : #{title.priorities})"></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-    <script src="datatable.js"></script>
+    <script src="/datatable.js"></script>
+
 </head>
 <body>
 <div lang="pl" th:replace="navbar :: navbar"> </div>
 <div class="container">
-    <table id="departmentsTable" class="display">
+    <table th:id="${type} == 'department' ? 'departmentsTable' : (${type} == 'status' ? 'statusTable' : 'priorityTable')" class="display">
         <thead>
         <tr>
             <th th:text="#{table.header.id}"></th>
-            <th th:text="#{table.header.department}"></th>
+            <th th:text="#{table.defectElement.name}"></th>
         </tr>
         </thead>
     </table>

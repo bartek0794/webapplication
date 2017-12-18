@@ -23,9 +23,14 @@
                 <li class="dropdown" sec:authorize="hasAuthority('ADMIN')">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" th:text="#{navbar.tools}"><span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a th:href="@{'/departments'}" th:text="#{navbar.showDepartments}"></a></li>
+                        <li><a th:href="@{'/defectElements/department'}" th:text="#{navbar.showDepartments}"></a></li>
+                        <li><a th:href="@{'/addDefectElement/department'}" th:text="#{navbar.addDepartment}"></a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a th:href="@{'/addDepartment'}" th:text="#{navbar.addDepartment}"></a></li>
+                        <li><a th:href="@{'/defectElements/status'}" th:text="#{navbar.showStatuses}"></a></li>
+                        <li><a th:href="@{'/addDefectElement/status'}" th:text="#{navbar.addStatus}"></a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a th:href="@{'/defectElements/priority'}" th:text="#{navbar.showPriorities}"></a></li>
+                        <li><a th:href="@{'/addDefectElement/priority'}" th:text="#{navbar.addPriority}"></a></li>
                         <li role="separator" class="divider"></li>
                     </ul>
                 </li>

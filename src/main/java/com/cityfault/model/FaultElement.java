@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class FaultElement{
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @NotEmpty
     @Size(min=5, max=30)

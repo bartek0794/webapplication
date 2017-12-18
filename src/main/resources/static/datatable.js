@@ -55,6 +55,40 @@ $(document).ready( function () {
     })
 
     $('#departmentsTable').on('click', 'tbody td', function(){
-        window.location.href = '/department/' + $(this).closest('tr').find('td:eq(0)').html();
+        window.location.href = '/defectElement/' + $(this).closest('tr').find('td:eq(0)').html();
+    });
+});
+
+$(document).ready( function () {
+    var table = $('#statusTable').DataTable({
+        "sAjaxSource": "/getAllStatuses",
+        "sAjaxDataProp": "",
+        "stateSave": "true",
+        "order": [[ 0, "asc" ]],
+        "aoColumns": [
+            { "mData": "id"},
+            { "mData": "name" }
+        ]
+    })
+
+    $('#statusTable').on('click', 'tbody td', function(){
+        window.location.href = '/defectElement/' + $(this).closest('tr').find('td:eq(0)').html();
+    });
+});
+
+$(document).ready( function () {
+    var table = $('#priorityTable').DataTable({
+        "sAjaxSource": "/getAllPriorities",
+        "sAjaxDataProp": "",
+        "stateSave": "true",
+        "order": [[ 0, "asc" ]],
+        "aoColumns": [
+            { "mData": "id"},
+            { "mData": "name" }
+        ]
+    })
+
+    $('#priorityTable').on('click', 'tbody td', function(){
+        window.location.href = '/defectElement/' + $(this).closest('tr').find('td:eq(0)').html();
     });
 });
