@@ -30,8 +30,7 @@ public class HomeController {
     }
 
     @RequestMapping("/defects")
-    public String getAllDefects(Model model) {
-        model.addAttribute("defects", faultService.getAllFault());
+    public String getAllDefects() {
         return "defects";
     }
 
