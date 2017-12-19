@@ -38,13 +38,18 @@ public class FaultRestController {
     @RequestMapping(value = "/getAllFault", method = RequestMethod.GET)
     public @ResponseBody
     List<Fault> getAllFault() {
-        return faultService.getAllFault();
+        List<Fault> defects = new ArrayList<Fault>();
+        for(Fault defect: faultService.getAllFault()) {
+            defect.setPhoto(null);
+            defects.add(defect);
+        }
+        return defects;
     }
 
     @RequestMapping(value="/createFault", method = RequestMethod.POST)
     public ResponseEntity<Fault> createFault(@RequestBody Fault fault) {
         fault.setDepartment(departmentService.getById(fault.getDepartment().getId()));
-        fault.setStatus(statusService.getByName("TO VERIFICATION"));
+        fault.setStatus(statusService.getByName("Do akceptacji"));
         fault.setCreateDate(LocalDateTime.now());
         photoService.savePhoto(fault.getPhoto());
         faultService.saveFault(fault);
