@@ -24,6 +24,9 @@ public class Fault {
     private Priority priority;
     @ManyToOne(cascade = CascadeType.ALL)
     private Photo photo;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private User user;
+
     private double latitude;
     private double longitude;
 

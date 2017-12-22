@@ -1,6 +1,7 @@
 package com.cityfault.serviceimpl;
 
 
+import com.cityfault.model.Department;
 import com.cityfault.model.Role;
 import com.cityfault.model.User;
 import com.cityfault.repository.UserRepository;
@@ -48,5 +49,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findAll(){
         return userRepository.findAll();
+    }
+    @Override
+    public List<User> findByDepartment(Department department) {
+        return userRepository.findByDepartment(department);
     }
 }

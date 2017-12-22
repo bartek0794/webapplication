@@ -1,6 +1,7 @@
 package com.cityfault.controller;
 
 import com.cityfault.model.Department;
+import com.cityfault.model.Fault;
 import com.cityfault.model.Priority;
 import com.cityfault.model.Status;
 import com.cityfault.service.FaultElementService;
@@ -9,15 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
-public class DepartmentController {
+public class FaultElementController {
     @Autowired
     FaultElementService<Department> departmentService;
     @Autowired
@@ -89,4 +88,54 @@ public class DepartmentController {
 
         return "redirect:/defectElements/priority";
     }
+
+    @RequestMapping("/defectElements/{type}")
+    public String showAllDepartments(@PathVariable String type, Model model) {
+        model.addAttribute("type", type);
+        return "/admin/defectElements";
+    }
+
+    @RequestMapping(value = "/defectElement/{type}/{id}", method= RequestMethod.GET)
+    public String getDepartment(@PathVariable int id, @PathVariable String type, Model model) {
+        model.addAttribute("defectElement", departmentService.getById(id));
+        model.addAttribute("type", type);
+        return "/admin/defectElement";
+    }
+
+    @PostMapping("/saveDefectElement/Department")
+    public String saveDepartment(HttpServletRequest request) {
+        int id = Integer.valueOf(request.getParameter("defectElementId"));
+
+        Department department = departmentService.getById(id);
+        department.setName(request.getParameter("defectElementName"));
+
+        departmentService.saveFaultElement(department);
+
+        return "redirect:/defectElement/Department/" + id;
+    }
+
+    @PostMapping("/saveDefectElement/Status")
+    public String saveStatus(HttpServletRequest request) {
+        int id = Integer.valueOf(request.getParameter("defectElementId"));
+
+        Status status = statusService.getById(id);
+        status.setName(request.getParameter("defectElementName"));
+
+        statusService.saveFaultElement(status);
+
+        return "redirect:/defectElement/Status/" + id;
+    }
+
+    @PostMapping("/saveDefectElement/Priority")
+    public String savePriority(HttpServletRequest request) {
+        int id = Integer.valueOf(request.getParameter("defectElementId"));
+
+        Priority priority = priorityService.getById(id);
+        priority.setName(request.getParameter("defectElementName"));
+
+        priorityService.saveFaultElement(priority);
+
+        return "redirect:/defectElement/Priority/" + id;
+    }
+
 }

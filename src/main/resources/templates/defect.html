@@ -79,6 +79,16 @@
                                 <span th:text="${defect.getCreateDate()}"></span>
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <h4 th:text="#{table.header.priority}"></h4>
+                            </td>
+                            <td>
+                                <select id="user" name="userName" class="form-control">
+                                    <option th:each="user : ${users}" th:value="${user.email}" th:text="${user.email}"></option>
+                                </select>
+                            </td>
+                        </tr>
                     </table>
                     <br/>
                     <input type="submit" th:value="#{form.input.submit.save}" class="btn btn-lg btn-primary btn-block" style="width: 200px; margin: 0 auto">

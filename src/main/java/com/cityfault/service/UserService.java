@@ -1,5 +1,6 @@
 package com.cityfault.service;
 
+import com.cityfault.model.Department;
 import com.cityfault.model.Role;
 import com.cityfault.model.User;
 
@@ -12,4 +13,5 @@ public interface UserService {
     void update(User user, HashSet<Role> role);
     User findById(int id);
     List<User> findAll();
+    List<User> findByDepartment(Department department);
 }

@@ -10,24 +10,14 @@
 <body>
 <div lang="pl" th:replace="navbar :: navbar"> </div>
 <div class="container">
-<table th:width="600px">
-    <tr>
-        <td>
-            <h4 th:text="#{table.header.id}"></h4>
-        </td>
-        <td>
-            <span th:text="${defectElement.getId()}"></span>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <h4 th:text="#{table.defectElement.name}"></h4>
-        </td>
-        <td>
-            <span th:text="${defectElement.getName()}"></span>
-        </td>
-    </tr>
-</table>
+    <form action="#" th:action="@{/saveDefectElement/{type}(type=${type})}" method="post">
+        <h2 class="form-signin-heading" align="center" th:text="${type} == 'Department' ? #{form.editDepartment.header} : (${type} == 'Status' ? #{form.editStatus.header} : #{form.editPriority.header})"></h2><br/>
+        <div class="row text-center" style="width: 300px; margin: 0 auto">
+            <input type="hidden" name="defectElementId" th:value="${defectElement.getId()}" />
+            <input type="text" name="defectElementName" th:value="${defectElement.getName()}" class="form-control"/> <br/>
+            <input type="submit" th:value="#{form.input.submit.save}" class="btn btn-lg btn-primary btn-block" style="width: 200px; margin: 0 auto">
+        </div>
+    </form>
 </div>
 </body>
 </html>

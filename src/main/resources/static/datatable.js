@@ -55,7 +55,7 @@ $(document).ready( function () {
     })
 
     $('#departmentsTable').on('click', 'tbody td', function(){
-        window.location.href = '/defectElement/' + $(this).closest('tr').find('td:eq(0)').html();
+        window.location.href = '/defectElement/Department/' + $(this).closest('tr').find('td:eq(0)').html();
     });
 });
 
@@ -72,7 +72,7 @@ $(document).ready( function () {
     })
 
     $('#statusTable').on('click', 'tbody td', function(){
-        window.location.href = '/defectElement/' + $(this).closest('tr').find('td:eq(0)').html();
+        window.location.href = '/defectElement/Status/' + $(this).closest('tr').find('td:eq(0)').html();
     });
 });
 
@@ -89,6 +89,6 @@ $(document).ready( function () {
     })
 
     $('#priorityTable').on('click', 'tbody td', function(){
-        window.location.href = '/defectElement/' + $(this).closest('tr').find('td:eq(0)').html();
+        window.location.href = '/defectElement/Priority/' + $(this).closest('tr').find('td:eq(0)').html();
     });
 });
