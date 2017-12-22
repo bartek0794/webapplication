@@ -14,67 +14,78 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-6">
-                <table th:width="600px">
-                    <tr>
-                        <td>
-                            <h4 th:text="#{form.input.defect.id}"></h4>
-                        </td>
-                        <td>
-                            <span th:text="${defect.getFaultId()}"></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h4 th:text="#{form.input.email}"></h4>
-                        </td>
-                        <td>
-                            <span th:text="${defect.getEmail()}"></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h4 th:text="#{form.input.defect.description}"></h4>
-                        </td>
-                        <td>
-                            <span th:text="${defect.getDescription()}"></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h4 th:text="#{table.header.department}"></h4>
-                        </td>
-                        <td>
-                            <span th:text="${defect.getDepartment().getName()}"></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h4 th:text="#{table.header.status}"></h4>
-                        </td>
-                        <td>
-                            <span th:text="${defect.getStatus().getName()}"></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h4 th:text="#{table.header.priority}"></h4>
-                        </td>
-                        <td>
-                            <span th:text="${defect.getPriority().getName()}"></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h4 th:text="#{table.header.createDate}"></h4>
-                        </td>
-                        <td>
-                            <span th:text="${defect.getCreateDate()}"></span>
-                        </td>
-                    </tr>
-                </table>
+                <form th:action="@{/saveDefect}" method="post">
+                    <table th:width="600px">
+                        <tr>
+                            <td>
+                                <h4 th:text="#{form.input.defect.id}"></h4>
+                            </td>
+                            <td>
+                                <input type="hidden" name="defectId" th:value="${defect.getFaultId()}" />
+                                <span th:text="${defect.getFaultId()}"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h4 th:text="#{form.input.email}"></h4>
+                            </td>
+                            <td>
+                                <span th:text="${defect.getEmail()}"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h4 th:text="#{form.input.defect.description}"></h4>
+                            </td>
+                            <td>
+                                <span th:text="${defect.getDescription()}"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h4 th:text="#{table.header.department}"></h4>
+                            </td>
+                            <td>
+                                <select id="department" name="departmentName" class="form-control">
+                                    <option th:each="department : ${departments}" th:value="${department.name}" th:text="${department.name}" th:selected="(${department.name} == ${defect.getDepartment().getName()}) ? 'true' : 'false'"></option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h4 th:text="#{table.header.status}"></h4>
+                            </td>
+                            <td>
+                                <select id="status" name="statusName" class="form-control">
+                                    <option th:each="status : ${statuses}" th:value="${status.name}" th:text="${status.name}" th:selected="(${status.name} == ${defect.getStatus().getName()}) ? 'true' : 'false'"></option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h4 th:text="#{table.header.priority}"></h4>
+                            </td>
+                            <td>
+                                <select id="priority" name="priorityName" class="form-control">
+                                    <option th:each="priority : ${priorities}" th:value="${priority.name}" th:text="${priority.name}" th:selected="(${priority.name} == ${defect.getPriority().getName()}) ? 'true' : 'false'"></option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h4 th:text="#{table.header.createDate}"></h4>
+                            </td>
+                            <td>
+                                <span th:text="${defect.getCreateDate()}"></span>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <input type="submit" th:value="#{form.input.submit.save}" class="btn btn-lg btn-primary btn-block" style="width: 200px; margin: 0 auto">
+                </form>
             </div>
-            <div class="col-xs-6">
-                <img id="myImg" th:src="@{'data:image/jpg;base64,'+${defect.getEncodedPhoto()}}" width="250" height="250" style="margin-left: 25px"/>
+            <div class="col-xs-6 text-right">
+                <img id="myImg" th:src="@{'data:image/jpg;base64,'+${defect.getEncodedPhoto()}}" width="350" height="350"/>
                 <div id="myModal" class="modal">
                     <span class="close">&times;</span>
                     <img class="modal-content" id="img01">
@@ -84,11 +95,11 @@
         </div>
         <br/>
         <br/>
-        <div class="row">
-            <input type="hidden" id="latitude" th:value="${defect.getLatitude()}"/>
-            <input type="hidden" id="longitude" th:value="${defect.getLongitude()}"/>
-            <div id="map"></div>
-        </div>>
+    </div>
+    <div>
+        <input type="hidden" id="latitude" th:value="${defect.getLatitude()}"/>
+        <input type="hidden" id="longitude" th:value="${defect.getLongitude()}"/>
+        <div id="map"></div>
     </div>
     <script>
 

@@ -14,4 +14,10 @@ public class Photo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int photoId;
     private byte[] photo;
+
+    public Photo(){
+        photoId = 0;
+        photo = new byte[0];
+
+    }
 }
