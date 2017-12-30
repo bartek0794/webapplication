@@ -24,7 +24,7 @@
             <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" th:placeholder="#{form.input.confirmPassword}"/>
             <h4 th:align="center" th:text="#{form.input.chooseRole}"></h4>
             <select id="chooseRole" name="role" onChange="setProfession(this)" class="form-control">
-                <option th:each="role : ${roles}" th:value="${role.role}" th:text="${role.role}"></option>
+                <option th:each="role : ${roles}" th:value="${role.role}" th:text="${role.role}" th:selected="(${role.role} == 'EMPLOYEE') ? 'true' : 'false'"></option>
             </select>
             <input type="text" id="inputFirstName" th:field="*{firstName}" class="form-control" th:placeholder="#{form.input.firstName}"/>
             <input type="text" id="inputLastName" class="form-control" th:field="*{lastName}" th:placeholder="#{form.input.lastName}"/>
@@ -40,7 +40,7 @@
     </form>
     <script type="text/javascript">
         function setProfession(select) {
-            if (select.value == "SPECIALIST") {
+            if (select.value != "ADMIN") {
                 document.getElementById("department").style.visibility = 'visible';
                 document.getElementById("labelDepartment").style.visibility = 'visible';
             }

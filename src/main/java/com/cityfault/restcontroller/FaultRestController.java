@@ -49,6 +49,7 @@ public class FaultRestController {
         List<Fault> defects = new ArrayList<Fault>();
         for(Fault defect: faultService.getAllFault()) {
             defect.setPhoto(new Photo());
+            defect.setUser(null);
             if(auth.getAuthorities().toString().equals("[DEPARTMENT_ADMIN]")) {
                 if(defect.getDepartment().getId() == loggedUser.getDepartment().getId()) {
                     defects.add(defect);

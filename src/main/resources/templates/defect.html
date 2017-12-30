@@ -12,10 +12,11 @@
 <body>
 <div lang="pl" th:replace="navbar :: navbar"> </div>
     <div class="container">
+        <h2 th:text="#{title.defect}" align="center"></h2>
         <div class="row">
             <div class="col-xs-6">
                 <form th:action="@{/saveDefect}" method="post">
-                    <table th:width="600px">
+                    <table th:width="500px">
                         <tr>
                             <td>
                                 <h4 th:text="#{form.input.defect.id}"></h4>
@@ -38,7 +39,7 @@
                                 <h4 th:text="#{form.input.defect.description}"></h4>
                             </td>
                             <td>
-                                <span th:text="${defect.getDescription()}"></span>
+                                <textarea th:text="${defect.getDescription()}" class="form-control" rows="4" cols="50" maxlength="200" style="resize: none"></textarea>
                             </td>
                         </tr>
                         <tr>
@@ -46,7 +47,7 @@
                                 <h4 th:text="#{table.header.department}"></h4>
                             </td>
                             <td>
-                                <select id="department" name="departmentName" class="form-control">
+                                <select id="department" name="departmentName" class="form-control" th:disabled="${defect.getStatus().getName()} eq 'Do akceptacji' ? 'false' : 'true'">
                                     <option th:each="department : ${departments}" th:value="${department.name}" th:text="${department.name}" th:selected="(${department.name} == ${defect.getDepartment().getName()}) ? 'true' : 'false'"></option>
                                 </select>
                             </td>
@@ -66,7 +67,7 @@
                                 <h4 th:text="#{table.header.priority}"></h4>
                             </td>
                             <td>
-                                <select id="priority" name="priorityName" class="form-control">
+                                <select id="priority" name="priorityName" class="form-control" th:disabled="${defect.getStatus().getName()} eq 'Do akceptacji' ? 'false' : 'true'">
                                     <option th:each="priority : ${priorities}" th:value="${priority.name}" th:text="${priority.name}" th:selected="(${priority.name} == ${defect.getPriority().getName()}) ? 'true' : 'false'"></option>
                                 </select>
                             </td>
@@ -81,10 +82,10 @@
                         </tr>
                         <tr>
                             <td>
-                                <h4 th:text="#{table.header.priority}"></h4>
+                                <h4 th:text="#{table.assignedEmployee}"></h4>
                             </td>
                             <td>
-                                <select id="user" name="userName" class="form-control">
+                                <select id="user" name="userName" class="form-control" th:disabled="${defect.getStatus().getName()} eq 'Do akceptacji' ? 'false' : 'true'">
                                     <option th:each="user : ${users}" th:value="${user.email}" th:text="${user.email}"></option>
                                 </select>
                             </td>

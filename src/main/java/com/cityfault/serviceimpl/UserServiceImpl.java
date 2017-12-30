@@ -5,12 +5,14 @@ import com.cityfault.model.Department;
 import com.cityfault.model.Role;
 import com.cityfault.model.User;
 import com.cityfault.repository.UserRepository;
+import com.cityfault.service.RoleService;
 import com.cityfault.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -20,6 +22,8 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private RoleService roleService;
 
     @Override
     public void save(User user, HashSet<Role> role) {
@@ -52,6 +56,13 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public List<User> findByDepartment(Department department) {
-        return userRepository.findByDepartment(department);
+       List<User> userList = new ArrayList<User>();
+
+       for(User user : userRepository.findByDepartment(department)) {
+           if(user.getRoles().contains(roleService.getRoleByName("EMPLOYEE"))) {
+               userList.add(user);
+           }
+       }
+        return userList;
     }
 }

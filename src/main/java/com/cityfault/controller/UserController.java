@@ -59,7 +59,7 @@ public class UserController {
     public String registryForm(Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("roles", roleService.getAllRoles());
-        model.addAttribute("departments", departmentService.getAll());
+        model.addAttribute("departments", departmentService.getAllDepartments());
         return "/admin/addUser";
     }
 
@@ -82,7 +82,7 @@ public class UserController {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("roles", roleService.getAllRoles());
-            model.addAttribute("departments", departmentService.getAll());
+            model.addAttribute("departments", departmentService.getAllDepartments());
             return "/admin/addUser";
         }
 
@@ -111,6 +111,39 @@ public class UserController {
     @RequestMapping(value = "/profile/{email}/show", method= RequestMethod.GET)
     public String showProfile(@PathVariable String email) {
         User user = userService.findByEmail(email);
+        return "redirect:/user/" + user.getUserId();
+    }
+
+    @PostMapping("/saveUser")
+    public String editUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, HttpServletRequest request) {
+        String pass = request.getParameter("newPassword");
+        if(pass != "") {
+            if (pass.length() < 5 || pass.length() > 15) {
+                ObjectError error = new ObjectError("password", "Password size must be between [5-15]");
+                bindingResult.addError(error);
+            }
+            if (!pass.matches(".*\\d.*")) {
+                ObjectError error = new ObjectError("passwordNumbers", "Password must have number");
+                bindingResult.addError(error);
+            }
+        }
+
+        if (bindingResult.hasErrors()) {
+            return "user";
+        }
+
+        User userToUpdate = userService.findById(user.getUserId());
+        userToUpdate.setFirstName(user.getFirstName());
+        userToUpdate.setLastName(user.getLastName());
+        userToUpdate.setPhoneNumber(user.getPhoneNumber());
+
+        if(pass != null) {
+            userToUpdate.setPassword(pass);
+            userService.save(userToUpdate, new HashSet<Role>(userToUpdate.getRoles()));
+        }
+        else {
+            userService.update(userToUpdate, new HashSet<Role>(userToUpdate.getRoles()));
+        }
         return "redirect:/user/" + user.getUserId();
     }
 

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+    <div>
+        <h3 th:text="${header}" align="center"></h3>
+        <table width="500" border="1" align="center">
+             <tr>
+                <td>
+                    <h4 th:text="#{table.header.status}"></h4>
+                </td>
+                <td>
+                    <span th:text="${status}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h4 th:text="#{table.header.priority}"></h4>
+                </td>
+                <td>
+                    <span th:text="${priority}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h4 th:text="#{table.header.department}"></h4>
+                </td>
+                <td>
+                    <span th:text="${department}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h4 th:text="#{table.header.description}"></h4>
+                </td>
+                <td>
+                    <span th:text="${description}"></span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

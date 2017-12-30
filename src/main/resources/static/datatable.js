@@ -7,7 +7,6 @@ $(document).ready( function () {
         "aoColumns": [
             { "mData":  "faultId"},
             { "mData": "email" },
-            { "mData": "description" },
             { "mData": "department.name" },
             { "mData": "status.name" },
             { "mData": "priority.name" },
