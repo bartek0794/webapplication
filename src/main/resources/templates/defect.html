@@ -39,7 +39,7 @@
                                 <h4 th:text="#{form.input.defect.description}"></h4>
                             </td>
                             <td>
-                                <textarea th:text="${defect.getDescription()}" class="form-control" rows="4" cols="50" maxlength="200" style="resize: none"></textarea>
+                                <textarea th:text="${defect.getDescription()}" th:disabled="${defect.getStatus().getName()} != 'Do akceptacji' ? 'true' : 'false'" class="form-control" rows="4" cols="50" maxlength="200" style="resize: none"></textarea>
                             </td>
                         </tr>
                         <tr>
@@ -90,15 +90,15 @@
                                 </select>
                             </td>
                         </tr>
-                        <tr th:if="${defect.getStatus().getName()} == 'W realizacji' || ${defect.getStatus().getName()} == 'Zakończony'">
+                        <tr th:if="${defect.getStatus().getName()} eq 'W realizacji' or ${defect.getStatus().getName()} eq 'Zakończony'">
                             <td>
                                 <h4 th:text="#{table.header.resolveDescription}"></h4>
                             </td>
                             <td>
-                                <textarea th:text="${defect.getResolveDescription()}"  th:disabled="${defect.getStatus().getName()} == 'Zakończony' ? 'true' : 'false'" name="resolveDescription" class="form-control" rows="4" cols="50" maxlength="200" style="resize: none"></textarea>
+                                <textarea th:text="${defect.getResolveDescription()}" th:disabled="${defect.getStatus().getName()} eq 'Zakończony' ? 'true' : 'false'" name="resolveDescription" class="form-control" rows="4" cols="50" maxlength="200" style="resize: none"></textarea>
                             </td>
                         </tr>
-                        <tr th:if="${defect.getStatus().getName()} == 'Zakończony'">
+                        <tr th:if="${defect.getStatus().getName()} eq 'Zakończony'">
                            <td>
                                 <h4 th:text="#{table.header.resolveDate}"></h4>
                             </td>

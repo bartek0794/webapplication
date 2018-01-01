@@ -76,6 +76,12 @@ public class DefectController {
         String newUser = request.getParameter("userName");
         String resolveDescription = request.getParameter("resolveDescription");
 
+        if (status != fault.getStatus()) {
+            emailService.prepareAndSend(fault.getEmail(), fault.getDepartment().getName(), status.getName(), fault.getPriority().getName(), fault.getDescription());
+        }
+
+        fault.setStatus(status);
+
         if(newDepartment != null) {
             fault.setDepartment(departmentService.getByName(newDepartment));
         }
@@ -88,13 +94,9 @@ public class DefectController {
         if(resolveDescription != null) {
             fault.setResolveDescription(resolveDescription);
             fault.setResolveDate(LocalDateTime.now());
+            fault.setStatus(statusService.getByName("Zakończony"));
         }
 
-        if (status != fault.getStatus()) {
-            emailService.prepareAndSend(fault.getEmail(), fault.getDepartment().getName(), status.getName(), fault.getPriority().getName(), fault.getDescription());
-        }
-
-        fault.setStatus(status);
         faultService.saveFault(fault);
 
         return "redirect:/defect/" + id;
