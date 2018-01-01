@@ -8,6 +8,7 @@ import com.cityfault.service.FaultElementService;
 import com.cityfault.service.FaultService;
 import com.cityfault.service.UserService;
 import com.cityfault.serviceimpl.EmailServiceImpl;
+import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -73,6 +74,8 @@ public class DefectController {
         String newDepartment = request.getParameter("departmentName");
         String newPriority = request.getParameter("priorityName");
         String newUser = request.getParameter("userName");
+        String resolveDescription = request.getParameter("resolveDescription");
+
         if(newDepartment != null) {
             fault.setDepartment(departmentService.getByName(newDepartment));
         }
@@ -81,6 +84,10 @@ public class DefectController {
         }
         if(newUser != null) {
             fault.setUser(userService.findByEmail(newUser));
+        }
+        if(resolveDescription != null) {
+            fault.setResolveDescription(resolveDescription);
+            fault.setResolveDate(LocalDateTime.now());
         }
 
         if (status != fault.getStatus()) {
