@@ -1,10 +1,11 @@
 package com.cityfault.service;
 
-import com.cityfault.model.Fault;
+import com.cityfault.model.Defect;
+
 import java.util.List;
 
 public interface FaultService {
-    void saveFault(Fault fault);
-    Fault getFaultById(Long id);
-    List<Fault> getAllFault();
+    void saveFault(Defect defect);
+    Defect getFaultById(Long id);
+    List<Defect> getAllFault();
 }

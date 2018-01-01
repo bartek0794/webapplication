@@ -9,7 +9,7 @@
 	<packaging>war</packaging>
 
 	<name>webapplication</name>
-	<description>City fault system - web application</description>
+	<description>City defect system - web application</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
