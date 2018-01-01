@@ -71,6 +71,7 @@ public class FaultRestController {
         fault.setStatus(statusService.getByName("Do akceptacji"));
         fault.setPriority(priorityService.getByName("Niski"));
         fault.setCreateDate(LocalDateTime.now());
+        fault.setResolveDate(LocalDateTime.now());
         photoService.savePhoto(fault.getPhoto());
         faultService.saveFault(fault);
         return new ResponseEntity<Fault>(fault, HttpStatus.CREATED);
