@@ -36,18 +36,18 @@ public class FaultRestController {
     //FAULTS
     @RequestMapping(value = "/getFault/{id}", method = RequestMethod.GET)
     public @ResponseBody
-    Defect getFault(@PathVariable("id") Long faultId) {
+    Fault getFault(@PathVariable("id") Long faultId) {
         return faultService.getFaultById(faultId);
     }
 
     @RequestMapping(value = "/getAllFault", method = RequestMethod.GET)
     public @ResponseBody
-    List<Defect> getAllFault() {
+    List<Fault> getAllFault() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User loggedUser = userService.findByEmail(auth.getName());
 
-        List<Defect> defects = new ArrayList<Defect>();
-        for(Defect defect: faultService.getAllFault()) {
+        List<Fault> defects = new ArrayList<Fault>();
+        for(Fault defect: faultService.getAllFault()) {
             defect.setPhoto(new Photo());
             defect.setUser(null);
             if(auth.getAuthorities().toString().equals("[DEPARTMENT_ADMIN]")) {
@@ -66,14 +66,14 @@ public class FaultRestController {
     }
 
     @RequestMapping(value="/createFault", method = RequestMethod.POST)
-    public ResponseEntity<Defect> createFault(@RequestBody Defect defect) {
-        defect.setDepartment(departmentService.getById(defect.getDepartment().getId()));
-        defect.setStatus(statusService.getByName("Do akceptacji"));
-        defect.setPriority(priorityService.getByName("Niski"));
-        defect.setCreateDate(LocalDateTime.now());
-        photoService.savePhoto(defect.getPhoto());
-        faultService.saveFault(defect);
-        return new ResponseEntity<Defect>(defect, HttpStatus.CREATED);
+    public ResponseEntity<Fault> createFault(@RequestBody Fault fault) {
+        fault.setDepartment(departmentService.getById(fault.getDepartment().getId()));
+        fault.setStatus(statusService.getByName("Do akceptacji"));
+        fault.setPriority(priorityService.getByName("Niski"));
+        fault.setCreateDate(LocalDateTime.now());
+        photoService.savePhoto(fault.getPhoto());
+        faultService.saveFault(fault);
+        return new ResponseEntity<Fault>(fault, HttpStatus.CREATED);
     }
 
     //Departments

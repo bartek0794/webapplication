@@ -1,6 +1,7 @@
 package com.cityfault.controller;
 
 import com.cityfault.model.Department;
+import com.cityfault.model.Fault;
 import com.cityfault.model.Priority;
 import com.cityfault.model.Status;
 import com.cityfault.service.FaultElementService;

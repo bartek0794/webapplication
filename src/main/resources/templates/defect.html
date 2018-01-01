@@ -90,22 +90,6 @@
                                 </select>
                             </td>
                         </tr>
-                        <tr th:if="${defect.getStatus().getName()} == 'W realizacji' || ${defect.getStatus().getName()} == 'Zakończony'">
-                            <td>
-                                <h4 th:text="#{table.header.resolveDescription}"></h4>
-                            </td>
-                            <td>
-                                <textarea th:text="${defect.getResolveDescription()}"  th:disabled="${defect.getStatus().getName()} == 'Zakończony' ? 'true' : 'false'" name="resolveDescription" class="form-control" rows="4" cols="50" maxlength="200" style="resize: none"></textarea>
-                            </td>
-                        </tr>
-                        <tr th:if="${defect.getStatus().getName()} == 'Zakończony'">
-                            <td>
-                                <h4 th:text="#{table.header.resolveDate}"></h4>
-                            </td>
-                            <td>
-                                <span th:text="${defect.getResolveDate()}"></span>
-                            </td>
-                        </tr>
                     </table>
                     <br/>
                     <input type="submit" th:value="#{form.input.submit.save}" class="btn btn-lg btn-primary btn-block" style="width: 200px; margin: 0 auto">

@@ -1,7 +1,7 @@
 package com.cityfault.serviceimpl;
 
 
-import com.cityfault.model.Defect;
+import com.cityfault.model.Fault;
 import com.cityfault.repository.FaultRepository;
 import com.cityfault.service.FaultService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,17 +15,17 @@ public class FaultServiceImpl implements FaultService {
     FaultRepository repository;
 
     @Override
-    public void saveFault(Defect defect) {
-        repository.save(defect);
+    public void saveFault(Fault fault) {
+        repository.save(fault);
     }
 
     @Override
-    public Defect getFaultById(Long id) {
+    public Fault getFaultById(Long id) {
         return repository.findByFaultId(id);
     }
 
     @Override
-    public List<Defect> getAllFault() {
+    public List<Fault> getAllFault() {
         return repository.findAll();
     }
 }
