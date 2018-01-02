@@ -108,7 +108,7 @@
                         </tr>
                     </table>
                     <br/>
-                    <input type="submit" th:value="#{form.input.submit.save}" class="btn btn-lg btn-primary btn-block" style="width: 200px; margin: 0 auto">
+                    <input type="submit" th:value="#{form.input.submit.save}" class="btn btn-lg btn-primary btn-block" style="width: 200px; margin: 0 auto" th:disabled="${disableSave}">
                 </form>
             </div>
             <div class="col-xs-6 text-right">

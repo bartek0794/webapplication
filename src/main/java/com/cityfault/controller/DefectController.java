@@ -1,9 +1,6 @@
 package com.cityfault.controller;
 
-import com.cityfault.model.Department;
-import com.cityfault.model.Fault;
-import com.cityfault.model.Priority;
-import com.cityfault.model.Status;
+import com.cityfault.model.*;
 import com.cityfault.service.FaultElementService;
 import com.cityfault.service.FaultService;
 import com.cityfault.service.UserService;
@@ -12,6 +9,8 @@ import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -64,6 +63,7 @@ public class DefectController {
         model.addAttribute("statuses", availableStatus);
         model.addAttribute("priorities", priorityService.getAllPriorities());
         model.addAttribute("users", userService.findByDepartment(fault.getDepartment()));
+        model.addAttribute("disableSave", !checkIfDefectCanBeProcess(fault));
         return "defect";
     }
 
@@ -99,9 +99,26 @@ public class DefectController {
             fault.setResolveDate(LocalDateTime.now().toString(fmt));
             fault.setStatus(statusService.getByName("Zakończony"));
         }
-
         faultService.saveFault(fault);
 
         return "redirect:/defect/" + id;
+    }
+
+    private boolean checkIfDefectCanBeProcess(Fault defect) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User loggedUser = userService.findByEmail(auth.getName());
+        Boolean defectCanBeProcess = true;
+
+        if(auth.getAuthorities().toString().equals("[DEPARTMENT_ADMIN]")) {
+            defectCanBeProcess = loggedUser.getDepartment().getId() == defect.getDepartment().getId();
+        }
+        else if(auth.getAuthorities().toString().equals("[EMPLOYEE]")) {
+            defectCanBeProcess = loggedUser.getUserId() == defect.getUser().getUserId();
+        }
+        return !checkIfDefectIsFinished(defect) && defectCanBeProcess;
+    }
+
+    private boolean checkIfDefectIsFinished(Fault defect) {
+        return defect.getStatus().getName().equals("Zakończony") || defect.getStatus().getName().equals("Odrzucony");
     }
 }
