@@ -15,4 +15,9 @@ public class HomeController {
     public String getInternationalPage() {
         return "redirect:/";
     }
+
+    @RequestMapping("/access-denied")
+    public String error403() {
+        return "/access-denied";
+    }
 }

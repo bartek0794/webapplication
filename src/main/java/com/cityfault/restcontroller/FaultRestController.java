@@ -51,16 +51,18 @@ public class FaultRestController {
         List<Fault> defects = new ArrayList<Fault>();
         for(Fault defect: faultService.getAllFault()) {
             defect.setPhoto(new Photo());
-            defect.setUser(null);
             if(auth.getAuthorities().toString().equals("[DEPARTMENT_ADMIN]")) {
                 if(defect.getDepartment().getId() == loggedUser.getDepartment().getId()) {
+                    defect.setUser(null);
                     defects.add(defect);
                 }
             } else if(auth.getAuthorities().toString().equals("[EMPLOYEE]")) {
                 if(defect.getUser().getUserId() == loggedUser.getUserId()) {
+                    defect.setUser(null);
                     defects.add(defect);
                 }
             } else {
+                defect.setUser(null);
                 defects.add(defect);
             }
         }

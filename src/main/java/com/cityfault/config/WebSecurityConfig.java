@@ -48,8 +48,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/getAllDepartments", "/createFault", "/international").permitAll()
-                .antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
+                .antMatchers("/getAllDepartments", "/createFault", "/international", "/getAllFault").permitAll()
+                .antMatchers("/admin/**", "/addUser", "/getAllUsers").hasAnyAuthority("ADMIN","DEPARTMENT_ADMIN").anyRequest()
                 .authenticated().and().csrf().disable().formLogin()
 
                 .loginPage("/login").failureUrl("/login?error=true")
