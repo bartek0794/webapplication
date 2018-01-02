@@ -1,7 +1,6 @@
 package com.cityfault.controller;
 
 import com.cityfault.model.Department;
-import com.cityfault.model.Fault;
 import com.cityfault.model.Priority;
 import com.cityfault.model.Status;
 import com.cityfault.service.FaultElementService;
@@ -27,22 +26,22 @@ public class FaultElementController {
     @GetMapping("/addDefectElement/{type}")
     public String addDepartment(@PathVariable String type, Model model) {
         if(type.equals("department")) {
-            model.addAttribute("faultElement", new Department());
+            model.addAttribute("defectElement", new Department());
             model.addAttribute("type", "Department");
         }
         else if(type.equals("status")) {
-            model.addAttribute("faultElement", new Status());
+            model.addAttribute("defectElement", new Status());
             model.addAttribute("type", "Status");
         }
         else if(type.equals("priority")) {
-            model.addAttribute("faultElement", new Priority());
+            model.addAttribute("defectElement", new Priority());
             model.addAttribute("type", "Priority");
         }
         return "/admin/addDefectElement";
     }
 
-    @PostMapping("/add/Department")
-    public String addDepartment(@Valid @ModelAttribute("faultElement") Department department, BindingResult bindingResult, Model model) {
+    @PostMapping("/save/Department")
+    public String addDepartment(@Valid @ModelAttribute("defectElement") Department department, BindingResult bindingResult, Model model, HttpServletRequest request) {
         if(departmentService.getByName(department.getName()) != null) {
             ObjectError error = new ObjectError("unique", "Department name already exists!");
             bindingResult.addError(error);
@@ -50,42 +49,51 @@ public class FaultElementController {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("type", "Department");
-            return "/admin/addDefectElement";
+            if(request.getParameter("action").equals("add")) {
+                return "/admin/addDefectElement";
+            } else {
+                return "/admin/defectElement";
+            }
         }
         departmentService.saveFaultElement(department);
-
         return "redirect:/defectElements/department";
     }
 
-    @PostMapping("/add/Status")
-    public String addDepartment(@Valid @ModelAttribute("faultElement") Status status, BindingResult bindingResult, Model model) {
-        if(departmentService.getByName(status.getName()) != null) {
+    @PostMapping("/save/Status")
+    public String addDepartment(@Valid @ModelAttribute("defectElement") Status status, BindingResult bindingResult, Model model, HttpServletRequest request) {
+        if(statusService.getByName(status.getName()) != null) {
             ObjectError error = new ObjectError("unique", "Status name already exists!");
             bindingResult.addError(error);
         }
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("type", "Status");
-            return "/admin/addDefectElement";
+            if(request.getParameter("action").equals("add")) {
+                return "/admin/addDefectElement";
+            } else {
+                return "/admin/defectElement";
+            }
         }
         statusService.saveFaultElement(status);
-
         return "redirect:/defectElements/status";
     }
 
-    @PostMapping("/add/Priority")
-    public String addPriority(@Valid @ModelAttribute("faultElement") Priority priority, BindingResult bindingResult, Model model) {
-        if(departmentService.getByName(priority.getName()) != null) {
+    @PostMapping("/save/Priority")
+    public String addPriority(@Valid @ModelAttribute("defectElement") Priority priority, BindingResult bindingResult, Model model, HttpServletRequest request) {
+        if(priorityService.getByName(priority.getName()) != null) {
             ObjectError error = new ObjectError("unique", "Priority name already exists!");
             bindingResult.addError(error);
         }
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("type", "Priority");
-            return "/admin/addDefectElement";
+            if(request.getParameter("action").equals("add")) {
+                return "/admin/addDefectElement";
+            } else {
+                return "/admin/defectElement";
+            }
         }
         priorityService.saveFaultElement(priority);
-
         return "redirect:/defectElements/priority";
     }
 
@@ -101,41 +109,4 @@ public class FaultElementController {
         model.addAttribute("type", type);
         return "/admin/defectElement";
     }
-
-    @PostMapping("/saveDefectElement/Department")
-    public String saveDepartment(HttpServletRequest request) {
-        int id = Integer.valueOf(request.getParameter("defectElementId"));
-
-        Department department = departmentService.getById(id);
-        department.setName(request.getParameter("defectElementName"));
-
-        departmentService.saveFaultElement(department);
-
-        return "redirect:/defectElement/Department/" + id;
-    }
-
-    @PostMapping("/saveDefectElement/Status")
-    public String saveStatus(HttpServletRequest request) {
-        int id = Integer.valueOf(request.getParameter("defectElementId"));
-
-        Status status = statusService.getById(id);
-        status.setName(request.getParameter("defectElementName"));
-
-        statusService.saveFaultElement(status);
-
-        return "redirect:/defectElement/Status/" + id;
-    }
-
-    @PostMapping("/saveDefectElement/Priority")
-    public String savePriority(HttpServletRequest request) {
-        int id = Integer.valueOf(request.getParameter("defectElementId"));
-
-        Priority priority = priorityService.getById(id);
-        priority.setName(request.getParameter("defectElementName"));
-
-        priorityService.saveFaultElement(priority);
-
-        return "redirect:/defectElement/Priority/" + id;
-    }
-
 }

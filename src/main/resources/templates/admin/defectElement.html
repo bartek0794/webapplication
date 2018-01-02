@@ -10,11 +10,13 @@
 <body>
 <div lang="pl" th:replace="navbar :: navbar"> </div>
 <div class="container">
-    <form action="#" th:action="@{/saveDefectElement/{type}(type=${type})}" method="post">
+    <form action="#" th:action="@{/save/{type}(type=${type})}" th:object="${defectElement}" method="post">
+        <div lang="pl" th:replace="validation :: validation" > </div>
         <h2 class="form-signin-heading" align="center" th:text="${type} == 'Department' ? #{form.editDepartment.header} : (${type} == 'Status' ? #{form.editStatus.header} : #{form.editPriority.header})"></h2><br/>
         <div class="row text-center" style="width: 300px; margin: 0 auto">
-            <input type="hidden" name="defectElementId" th:value="${defectElement.getId()}" />
-            <input type="text" name="defectElementName" th:value="${defectElement.getName()}" class="form-control"/> <br/>
+            <input type="hidden" name="action" value="update" />
+            <input type="hidden" th:field="${defectElement.id}" />
+            <input type="text" class="form-control" th:placeholder="#{table.defectElement.name}"  th:field="${defectElement.name}" /> <br/>
             <input type="submit" th:value="#{form.input.submit.save}" class="btn btn-lg btn-primary btn-block" style="width: 200px; margin: 0 auto">
         </div>
     </form>
