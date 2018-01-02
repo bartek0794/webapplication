@@ -6,6 +6,8 @@ import com.cityfault.service.FaultService;
 import com.cityfault.service.PhotoService;
 import com.cityfault.service.UserService;
 import org.joda.time.LocalDateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -67,11 +69,12 @@ public class FaultRestController {
 
     @RequestMapping(value="/createFault", method = RequestMethod.POST)
     public ResponseEntity<Fault> createFault(@RequestBody Fault fault) {
+        DateTimeFormatter fmt = DateTimeFormat.forPattern("dd-MM-yyyy, HH:mm");
+
         fault.setDepartment(departmentService.getById(fault.getDepartment().getId()));
         fault.setStatus(statusService.getByName("Do akceptacji"));
         fault.setPriority(priorityService.getByName("Niski"));
-        fault.setCreateDate(LocalDateTime.now());
-        fault.setResolveDate(LocalDateTime.now());
+        fault.setCreateDate(LocalDateTime.now().toString(fmt));
         photoService.savePhoto(fault.getPhoto());
         faultService.saveFault(fault);
         return new ResponseEntity<Fault>(fault, HttpStatus.CREATED);

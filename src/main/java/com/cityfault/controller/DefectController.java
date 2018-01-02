@@ -9,6 +9,8 @@ import com.cityfault.service.FaultService;
 import com.cityfault.service.UserService;
 import com.cityfault.serviceimpl.EmailServiceImpl;
 import org.joda.time.LocalDateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -92,8 +94,9 @@ public class DefectController {
             fault.setUser(userService.findByEmail(newUser));
         }
         if(resolveDescription != null) {
+            DateTimeFormatter fmt = DateTimeFormat.forPattern("dd-MM-yyyy, HH:mm");
             fault.setResolveDescription(resolveDescription);
-            fault.setResolveDate(LocalDateTime.now());
+            fault.setResolveDate(LocalDateTime.now().toString(fmt));
             fault.setStatus(statusService.getByName("Zakończony"));
         }
 
