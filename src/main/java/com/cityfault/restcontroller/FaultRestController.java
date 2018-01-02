@@ -57,9 +57,11 @@ public class FaultRestController {
                     defects.add(defect);
                 }
             } else if(auth.getAuthorities().toString().equals("[EMPLOYEE]")) {
-                if(defect.getUser().getUserId() == loggedUser.getUserId()) {
-                    defect.setUser(null);
-                    defects.add(defect);
+                if(defect.getUser() != null) {
+                    if (defect.getUser().getUserId() == loggedUser.getUserId()) {
+                        defect.setUser(null);
+                        defects.add(defect);
+                    }
                 }
             } else {
                 defect.setUser(null);

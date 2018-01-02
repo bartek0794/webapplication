@@ -113,7 +113,12 @@ public class DefectController {
             defectCanBeProcess = loggedUser.getDepartment().getId() == defect.getDepartment().getId();
         }
         else if(auth.getAuthorities().toString().equals("[EMPLOYEE]")) {
-            defectCanBeProcess = loggedUser.getUserId() == defect.getUser().getUserId();
+            if(defect.getUser() != null) {
+                defectCanBeProcess = loggedUser.getUserId() == defect.getUser().getUserId();
+            }
+            else {
+                return false;
+            }
         }
         return !checkIfDefectIsFinished(defect) && defectCanBeProcess;
     }
