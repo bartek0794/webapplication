@@ -1,5 +1,13 @@
 $(document).ready( function () {
+    if ($(document).attr('title') == 'Usterki') {
+        var lang = 'Polish.json';
+    } else {
+        var lang = 'English.json';
+    }
     var table = $('#defectsTable').DataTable({
+        language: {
+            url: 'http://cdn.datatables.net/plug-ins/1.10.16/i18n/' + lang
+        },
         "sAjaxSource": "/getAllFault",
         "sAjaxDataProp": "",
         "stateSave": "true",

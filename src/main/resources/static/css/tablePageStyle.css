@@ -1,0 +1,23 @@
+body {
+    background-color: #e9e9e9;
+}
+
+#defectsTable tr {
+    cursor: pointer;
+}
+
+#usersTable tr {
+    cursor: pointer;
+}
+
+#departmentsTable tr {
+    cursor: pointer;
+}
+
+#statusTable tr {
+    cursor: pointer;
+}
+
+#priorityTable tr {
+    cursor: pointer;
+}
