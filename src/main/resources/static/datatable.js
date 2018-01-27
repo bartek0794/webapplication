@@ -28,7 +28,15 @@ $(document).ready( function () {
 });
 
 $(document).ready( function () {
+    if ($(document).attr('title') == 'Users') {
+        var lang = 'English.json';
+    } else {
+        var lang = 'Polish.json';
+    }
     var table = $('#usersTable').DataTable({
+        language: {
+            url: 'http://cdn.datatables.net/plug-ins/1.10.16/i18n/' + lang
+        },
         "sAjaxSource": "/getAllUsers",
         "sAjaxDataProp": "",
         "stateSave": "true",
@@ -50,7 +58,15 @@ $(document).ready( function () {
 });
 
 $(document).ready( function () {
+    if ($(document).attr('title') == 'Departamenty') {
+        var lang = 'Polish.json';
+    } else {
+        var lang = 'English.json';
+    }
     var table = $('#departmentsTable').DataTable({
+        language: {
+            url: 'http://cdn.datatables.net/plug-ins/1.10.16/i18n/' + lang
+        },
         "sAjaxSource": "/getAllDepartments",
         "sAjaxDataProp": "",
         "stateSave": "true",
@@ -67,7 +83,15 @@ $(document).ready( function () {
 });
 
 $(document).ready( function () {
+    if ($(document).attr('title') == 'Statusy') {
+        var lang = 'Polish.json';
+    } else {
+        var lang = 'English.json';
+    }
     var table = $('#statusTable').DataTable({
+        language: {
+            url: 'http://cdn.datatables.net/plug-ins/1.10.16/i18n/' + lang
+        },
         "sAjaxSource": "/getAllStatuses",
         "sAjaxDataProp": "",
         "stateSave": "true",
@@ -84,7 +108,15 @@ $(document).ready( function () {
 });
 
 $(document).ready( function () {
+    if ($(document).attr('title') == 'Priorytety') {
+        var lang = 'Polish.json';
+    } else {
+        var lang = 'English.json';
+    }
     var table = $('#priorityTable').DataTable({
+        language: {
+            url: 'http://cdn.datatables.net/plug-ins/1.10.16/i18n/' + lang
+        },
         "sAjaxSource": "/getAllPriorities",
         "sAjaxDataProp": "",
         "stateSave": "true",

@@ -18,20 +18,20 @@ public class User {
     @Column(name = "user_id")
     private int userId;
     @Email
-    @NotEmpty
-    @Size(min=5, max=30)
+    @NotEmpty(message="{notNull.name}")
+    @Size(min=5, max=30, message="{size.name}")
     private String email;
-    @NotEmpty
+    @NotEmpty(message="{notNull.name}")
     private String password;
     @Column(name = "active")
     private int active;
-    @NotEmpty
-    @Size(max=20)
+    @NotEmpty(message="{notNull.name}")
+    @Size(max=20, message="{size20.name}")
     private String firstName;
-    @NotEmpty
-    @Size(max=20)
+    @NotEmpty(message="{notNull.name}")
+    @Size(max=20, message="{size20.name}")
     private String lastName;
-    @NotEmpty
+    @NotEmpty(message="{notNull.name}")
     @Pattern(regexp="(^$|[0-9]{9})")
     private String phoneNumber;
     private byte[] avatar;

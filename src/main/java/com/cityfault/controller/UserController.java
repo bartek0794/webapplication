@@ -8,6 +8,8 @@ import com.cityfault.service.RoleService;
 import com.cityfault.service.UserService;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -34,6 +36,8 @@ public class UserController {
     private FaultElementService<Department> departmentService;
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private MessageSource messageSource;
 
     @RequestMapping("/users")
     public String showAllUsers() {
@@ -68,15 +72,15 @@ public class UserController {
                              @RequestParam("file") MultipartFile file) throws IOException {
 
         if(!request.getParameter("confirmPassword").equals(user.getPassword())) {
-            ObjectError error = new ObjectError("confirmPassword","Confirm password don't matches to password!");
+            ObjectError error = new ObjectError("confirmPassword",(messageSource.getMessage("password.match",null, LocaleContextHolder.getLocale())));
             bindingResult.addError(error);
         }
         if(user.getPassword().length() < 5 || user.getPassword().length() > 15) {
-            ObjectError error = new ObjectError("password","Password size must be between [5-15]");
+            ObjectError error = new ObjectError("password",(messageSource.getMessage("password.size",null, LocaleContextHolder.getLocale())));
             bindingResult.addError(error);
         }
         if(!user.getPassword().matches(".*\\d.*")) {
-            ObjectError error = new ObjectError("passwordNumbers","Password must have number");
+            ObjectError error = new ObjectError("passwordNumbers",(messageSource.getMessage("password.number",null, LocaleContextHolder.getLocale())));
             bindingResult.addError(error);
         }
 
@@ -117,13 +121,13 @@ public class UserController {
     @PostMapping("/saveUser")
     public String editUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, HttpServletRequest request) {
         String pass = request.getParameter("newPassword");
-        if(pass != "") {
+        if(pass != null) {
             if (pass.length() < 5 || pass.length() > 15) {
-                ObjectError error = new ObjectError("password", "Password size must be between [5-15]");
+                ObjectError error = new ObjectError("password", (messageSource.getMessage("password.size",null, LocaleContextHolder.getLocale())));
                 bindingResult.addError(error);
             }
             if (!pass.matches(".*\\d.*")) {
-                ObjectError error = new ObjectError("passwordNumbers", "Password must have number");
+                ObjectError error = new ObjectError("passwordNumbers", (messageSource.getMessage("password.number",null, LocaleContextHolder.getLocale())));
                 bindingResult.addError(error);
             }
         }

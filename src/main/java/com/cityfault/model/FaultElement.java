@@ -13,7 +13,7 @@ public abstract class FaultElement{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @NotEmpty
-    @Size(min=5, max=30)
+    @NotEmpty(message="{notNull.name}")
+    @Size(min=5, max=30, message="{size.name}")
     private String name;
 }
