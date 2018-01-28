@@ -21,11 +21,11 @@
             <br/>
             <input type="email" id="inputEmail" class="form-control" th:placeholder="#{form.input.email}"  th:field="*{email}" />
             <input type="password" id="inputPassword" th:field="*{password}" class="form-control" th:placeholder="#{form.input.password}"/>
-            <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" th:placeholder="#{form.input.confirmPassword}"/>
+            <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" th:placeholder="#{form.input.confirmPassword}"/><br/>
             <h4 th:align="center" th:text="#{form.input.chooseRole}"></h4>
             <select id="chooseRole" name="role" onChange="setProfession(this)" class="form-control">
                 <option th:each="role : ${roles}" th:value="${role.role}" th:text="${role.role}" th:selected="(${role.role} == 'EMPLOYEE') ? 'true' : 'false'"></option>
-            </select>
+            </select><br/>
             <input type="text" id="inputFirstName" th:field="*{firstName}" class="form-control" th:placeholder="#{form.input.firstName}"/>
             <input type="text" id="inputLastName" class="form-control" th:field="*{lastName}" th:placeholder="#{form.input.lastName}"/>
             <input type="text" id="inputPhoneNumber" class="form-control" th:field="*{phoneNumber}" th:placeholder="#{form.input.phoneNumber}"/><br/>

@@ -7,9 +7,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body style="background-color: #e9e9e9;">
 <div lang="pl" th:replace="navbar :: navbar"> </div>
 <div class="container">
+    <br/>
     <form action="#" th:action="@{/save/{type}(type=${type})}" th:object="${defectElement}" method="post">
         <div lang="pl" th:replace="validation :: validation" > </div>
         <h2 class="form-signin-heading" align="center" th:text="${type} == 'Department' ? #{form.department.header} : (${type} == 'Status' ? #{form.status.header} : #{form.priority.header})"></h2><br/>
