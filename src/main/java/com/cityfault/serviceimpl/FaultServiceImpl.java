@@ -1,6 +1,5 @@
 package com.cityfault.serviceimpl;
 
-
 import com.cityfault.model.Fault;
 import com.cityfault.repository.FaultRepository;
 import com.cityfault.service.FaultService;

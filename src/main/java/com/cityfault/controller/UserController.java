@@ -150,5 +150,4 @@ public class UserController {
         }
         return "redirect:/user/" + user.getUserId();
     }
-
 }

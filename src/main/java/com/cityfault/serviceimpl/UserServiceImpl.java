@@ -1,6 +1,5 @@
 package com.cityfault.serviceimpl;
 
-
 import com.cityfault.model.Department;
 import com.cityfault.model.Role;
 import com.cityfault.model.User;
@@ -10,7 +9,6 @@ import com.cityfault.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 
 import java.util.ArrayList;
 import java.util.HashSet;

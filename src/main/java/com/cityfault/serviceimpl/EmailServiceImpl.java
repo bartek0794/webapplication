@@ -32,8 +32,6 @@ public class EmailServiceImpl implements EmailService {
         };
         try {
             emailSender.send(messagePreparator);
-        } catch (MailException e) {
-            // runtime exception; compiler will not force you to handle it
-        }
+        } catch (MailException e) { }
     }
 }

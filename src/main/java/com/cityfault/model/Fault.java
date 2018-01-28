@@ -1,9 +1,6 @@
 package com.cityfault.model;
 
 import lombok.Data;
-import org.hibernate.annotations.Type;
-import org.joda.time.LocalDateTime;
-
 
 import javax.persistence.*;
 import java.util.Base64;

@@ -34,8 +34,6 @@ public class FaultRestController {
     @Autowired
     private PhotoService photoService;
 
-
-    //FAULTS
     @RequestMapping(value = "/getFault/{id}", method = RequestMethod.GET)
     public @ResponseBody
     Fault getFault(@PathVariable("id") Long faultId) {
@@ -84,21 +82,31 @@ public class FaultRestController {
         return new ResponseEntity<Fault>(fault, HttpStatus.CREATED);
     }
 
-    //Departments
+    @RequestMapping(value = "/getAllUsers", method = RequestMethod.GET)
+    public @ResponseBody
+    List<User> getAllUsers() {
+        List<User> users = new ArrayList<User>();
+
+        for(User user: userService.findAll()) {
+            user.setAvatar(new byte[0]);
+            user.setPassword("");
+            users.add(user);
+        }
+        return users;
+    }
+
     @RequestMapping(value = "/getAllDepartments", method = RequestMethod.GET)
     public @ResponseBody
     List<Department> getAllDepartments() {
         return departmentService.getAllDepartments();
     }
 
-    //Statuses
     @RequestMapping(value = "/getAllStatuses", method = RequestMethod.GET)
     public @ResponseBody
     List<Status> getAllStatuses() {
         return statusService.getAllStatuses();
     }
 
-    //Priorities
     @RequestMapping(value = "/getAllPriorities", method = RequestMethod.GET)
     public @ResponseBody
     List<Priority> getAllPriorities() {

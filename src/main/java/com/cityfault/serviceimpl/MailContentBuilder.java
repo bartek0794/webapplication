@@ -9,7 +9,6 @@ import org.thymeleaf.context.Context;
 public class MailContentBuilder {
 
     private TemplateEngine templateEngine;
-
     @Autowired
     public MailContentBuilder(TemplateEngine templateEngine) {
         this.templateEngine = templateEngine;
@@ -24,5 +23,4 @@ public class MailContentBuilder {
         context.setVariable("description", description);
         return templateEngine.process("mailTemplate", context);
     }
-
 }

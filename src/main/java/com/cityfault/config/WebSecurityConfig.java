@@ -51,7 +51,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/getAllDepartments", "/createFault", "/international", "/getAllFault").permitAll()
                 .antMatchers("/users", "/addUser", "/getAllUsers", "/defectElements/*").hasAuthority("ADMIN").anyRequest()
                 .authenticated().and().csrf().disable().formLogin()
-
                 .loginPage("/login").failureUrl("/login?error=true")
                 .defaultSuccessUrl("/home")
                 .usernameParameter("email")

@@ -18,6 +18,5 @@ public class Photo {
     public Photo(){
         photoId = 0;
         photo = new byte[0];
-
     }
 }
