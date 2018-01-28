@@ -34,13 +34,7 @@ public class FaultRestController {
     @Autowired
     private PhotoService photoService;
 
-    @RequestMapping(value = "/getFault/{id}", method = RequestMethod.GET)
-    public @ResponseBody
-    Fault getFault(@PathVariable("id") Long faultId) {
-        return faultService.getFaultById(faultId);
-    }
-
-    @RequestMapping(value = "/getAllFault", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/getAllDefects", method = RequestMethod.GET)
     public @ResponseBody
     List<Fault> getAllFault() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -69,8 +63,8 @@ public class FaultRestController {
         return defects;
     }
 
-    @RequestMapping(value="/createFault", method = RequestMethod.POST)
-    public ResponseEntity<Fault> createFault(@RequestBody Fault fault) {
+    @RequestMapping(value="/api/createDefect", method = RequestMethod.POST)
+    public ResponseEntity<Fault> createDefect(@RequestBody Fault fault) {
         DateTimeFormatter fmt = DateTimeFormat.forPattern("dd-MM-yyyy, HH:mm");
 
         fault.setDepartment(departmentService.getById(fault.getDepartment().getId()));
@@ -82,7 +76,7 @@ public class FaultRestController {
         return new ResponseEntity<Fault>(fault, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/getAllUsers", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/getAllUsers", method = RequestMethod.GET)
     public @ResponseBody
     List<User> getAllUsers() {
         List<User> users = new ArrayList<User>();
@@ -95,19 +89,19 @@ public class FaultRestController {
         return users;
     }
 
-    @RequestMapping(value = "/getAllDepartments", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/getAllDepartments", method = RequestMethod.GET)
     public @ResponseBody
     List<Department> getAllDepartments() {
         return departmentService.getAllDepartments();
     }
 
-    @RequestMapping(value = "/getAllStatuses", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/getAllStatuses", method = RequestMethod.GET)
     public @ResponseBody
     List<Status> getAllStatuses() {
         return statusService.getAllStatuses();
     }
 
-    @RequestMapping(value = "/getAllPriorities", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/getAllPriorities", method = RequestMethod.GET)
     public @ResponseBody
     List<Priority> getAllPriorities() {
         return priorityService.getAllPriorities();

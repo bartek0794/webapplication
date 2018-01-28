@@ -8,7 +8,7 @@ $(document).ready( function () {
         language: {
             url: 'http://cdn.datatables.net/plug-ins/1.10.16/i18n/' + lang
         },
-        "sAjaxSource": "/getAllFault",
+        "sAjaxSource": "/api/getAllDefects",
         "sAjaxDataProp": "",
         "stateSave": "true",
         "order": [[ 0, "asc" ]],
@@ -37,7 +37,7 @@ $(document).ready( function () {
         language: {
             url: 'http://cdn.datatables.net/plug-ins/1.10.16/i18n/' + lang
         },
-        "sAjaxSource": "/getAllUsers",
+        "sAjaxSource": "/api/getAllUsers",
         "sAjaxDataProp": "",
         "stateSave": "true",
         "order": [[ 0, "asc" ]],
@@ -67,7 +67,7 @@ $(document).ready( function () {
         language: {
             url: 'http://cdn.datatables.net/plug-ins/1.10.16/i18n/' + lang
         },
-        "sAjaxSource": "/getAllDepartments",
+        "sAjaxSource": "/api/getAllDepartments",
         "sAjaxDataProp": "",
         "stateSave": "true",
         "order": [[ 0, "asc" ]],
@@ -92,7 +92,7 @@ $(document).ready( function () {
         language: {
             url: 'http://cdn.datatables.net/plug-ins/1.10.16/i18n/' + lang
         },
-        "sAjaxSource": "/getAllStatuses",
+        "sAjaxSource": "/api/getAllStatuses",
         "sAjaxDataProp": "",
         "stateSave": "true",
         "order": [[ 0, "asc" ]],
@@ -117,7 +117,7 @@ $(document).ready( function () {
         language: {
             url: 'http://cdn.datatables.net/plug-ins/1.10.16/i18n/' + lang
         },
-        "sAjaxSource": "/getAllPriorities",
+        "sAjaxSource": "/api/getAllPriorities",
         "sAjaxDataProp": "",
         "stateSave": "true",
         "order": [[ 0, "asc" ]],
