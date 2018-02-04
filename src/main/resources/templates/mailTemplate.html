@@ -5,6 +5,14 @@
     <div>
         <h3 th:text="${header}" align="center"></h3>
         <table width="500" border="1" align="center">
+            <tr>
+                <td>
+                    <h4 th:text="#{table.header.title }"></h4>
+                </td>
+                <td>
+                    <span th:text="${title}"></span>
+                </td>
+            </tr>
              <tr>
                 <td>
                     <h4 th:text="#{table.header.status}"></h4>

@@ -22,12 +22,12 @@ public class EmailServiceImpl implements EmailService {
     @Autowired
     private MessageSource messageSource;
 
-    public void prepareAndSend(String recipient, String department, String status, String priority, String description) {
+    public void prepareAndSend(String recipient, String department, String status, String priority, String description, String title) {
         MimeMessagePreparator messagePreparator = mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
             messageHelper.setTo(recipient);
             messageHelper.setSubject(messageSource.getMessage("email.subject",null, LocaleContextHolder.getLocale()));
-            String content = mailContentBuilder.build(messageSource.getMessage("email.content",null, LocaleContextHolder.getLocale()), department, status, priority, description);
+            String content = mailContentBuilder.build(messageSource.getMessage("email.content",null, LocaleContextHolder.getLocale()), department, status, priority, description, title);
             messageHelper.setText(content, true);
         };
         try {

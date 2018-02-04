@@ -12,6 +12,7 @@ public class Fault {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long faultId;
     private String email;
+    private String title;
     private String description;
     @ManyToOne(cascade = CascadeType.ALL)
     private Department department;

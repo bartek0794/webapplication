@@ -36,6 +36,14 @@
                         </tr>
                         <tr>
                             <td>
+                                <h4 th:text="#{table.header.title }"></h4>
+                            </td>
+                            <td>
+                                <span th:text="${defect.getTitle()}"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 <h4 th:text="#{form.input.defect.description}"></h4>
                             </td>
                             <td>
@@ -158,7 +166,7 @@
             modal.style.display = "block";
             modalImg.src = this.src;
             captionText.innerHTML = this.alt;
-        }
+        };
 
         var span = document.getElementsByClassName("close")[0];
 

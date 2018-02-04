@@ -79,7 +79,7 @@ public class DefectController {
         String resolveDescription = request.getParameter("resolveDescription");
 
         if (status != fault.getStatus()) {
-            emailService.prepareAndSend(fault.getEmail(), fault.getDepartment().getName(), status.getName(), fault.getPriority().getName(), fault.getDescription());
+            emailService.prepareAndSend(fault.getEmail(), fault.getDepartment().getName(), status.getName(), fault.getPriority().getName(), fault.getDescription(), fault.getTitle());
         }
 
         fault.setStatus(status);

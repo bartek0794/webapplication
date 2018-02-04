@@ -14,13 +14,14 @@ public class MailContentBuilder {
         this.templateEngine = templateEngine;
     }
 
-    public String build(String header, String department, String status, String priority, String description) {
+    public String build(String header, String department, String status, String priority, String description, String title) {
         Context context = new Context();
         context.setVariable("header", header);
         context.setVariable("department", department);
         context.setVariable("status", status);
         context.setVariable("priority", priority);
         context.setVariable("description", description);
+        context.setVariable("title", title);
         return templateEngine.process("mailTemplate", context);
     }
 }
