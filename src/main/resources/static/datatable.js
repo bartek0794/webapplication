@@ -15,12 +15,13 @@ $(document).ready( function () {
         "aoColumns": [
             { "mData":  "faultId"},
             { "mData": "email" },
+            { "mData": "title" },
             { "mData": "department.name" },
             { "mData": "status.name" },
             { "mData": "priority.name" },
             { "mData": "createDate" }
         ]
-    })
+    });
 
     $('#defectsTable').on('click', 'tbody td', function(){
         window.location.href = '/defect/' + $(this).closest('tr').find('td:eq(0)').html();
@@ -50,7 +51,7 @@ $(document).ready( function () {
             { "mData": "lastName" },
             { "mData": "phoneNumber" }
         ]
-    })
+    });
 
     $('#usersTable').on('click', 'tbody td', function(){
         window.location.href = '/user/' + $(this).closest('tr').find('td:eq(0)').html();
@@ -75,7 +76,7 @@ $(document).ready( function () {
             { "mData": "id"},
             { "mData": "name" }
         ]
-    })
+    });
 
     $('#departmentsTable').on('click', 'tbody td', function(){
         window.location.href = '/defectElement/Department/' + $(this).closest('tr').find('td:eq(0)').html();
@@ -100,7 +101,7 @@ $(document).ready( function () {
             { "mData": "id"},
             { "mData": "name" }
         ]
-    })
+    });
 
     $('#statusTable').on('click', 'tbody td', function(){
         window.location.href = '/defectElement/Status/' + $(this).closest('tr').find('td:eq(0)').html();
@@ -125,7 +126,7 @@ $(document).ready( function () {
             { "mData": "id"},
             { "mData": "name" }
         ]
-    })
+    });
 
     $('#priorityTable').on('click', 'tbody td', function(){
         window.location.href = '/defectElement/Priority/' + $(this).closest('tr').find('td:eq(0)').html();
