@@ -93,8 +93,8 @@
                                 <h4 th:text="#{table.assignedEmployee}"></h4>
                             </td>
                             <td>
-                                <select id="user" name="userName" class="form-control" th:disabled="${defect.getStatus().getName()} eq 'Do akceptacji' ? 'false' : 'true'" th:selected="${defect.getUser().getEmail()}">
-                                    <option th:each="user : ${users}" th:value="${user.email}" th:text="${user.email}"></option>
+                                <select id="user" name="userName" class="form-control" th:disabled="${defect.getStatus().getName()} eq 'Do akceptacji' ? 'false' : 'true'">
+                                    <option th:each="user : ${users}" th:value="${user.email}" th:text="${user.email}" th:selected="(${user.email} == ${defect.getUser().getEmail()}) ? 'true' : 'false'"></option>
                                 </select>
                             </td>
                         </tr>
